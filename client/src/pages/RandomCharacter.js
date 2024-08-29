@@ -67,10 +67,14 @@ function RandomCharacter() {
         })
     }
 
-    useEffect(() => {
+    function generateCharacter() {
         setRandomRace();
         setRandomClass();
         setRandomBackground();
+    }
+
+    useEffect(() => {
+        generateCharacter();
     }, []);
     
     return (
@@ -81,6 +85,7 @@ function RandomCharacter() {
                 charClass: charClass,
                 background: background
             }} />
+            <button onClick={generateCharacter} >New Character</button>
         </>
     )
 }
