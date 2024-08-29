@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
-import Home from "../pages/Home";
-import RandomCharacter from "../pages/RandomCharacter";
+import Header from "./Header";
 
 function App() {
-  // return <Home/>;
-  return <RandomCharacter/>
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  )
 }
 
 export default App;

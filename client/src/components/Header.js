@@ -1,5 +1,13 @@
+import { Link } from "react-router-dom";
+
 function Header() {
-    return <h1>Inspiration Generator</h1>;
+    return (
+        <>
+            <header>
+                <Link to='/'>Inspiration Generator</Link>
+            </header>
+        </>
+    )
 }
 
 export default Header; 
