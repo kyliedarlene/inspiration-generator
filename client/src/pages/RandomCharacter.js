@@ -10,7 +10,7 @@ function RandomCharacter() {
     const [race, setRace] = useState({});
     const [charClass, setCharClass] = useState({});
     const [background, setBackground] = useState({});
-    //// condense to character as only state variable
+    //// condense to character as only state variable?
     
     function randomIndex(array) {
         return Math.floor(Math.random() * array.length);
