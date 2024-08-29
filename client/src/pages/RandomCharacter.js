@@ -2,7 +2,7 @@ import {
     useState, 
     useEffect 
 } from "react";
-
+import { Link } from "react-router-dom";
 
 import CharacterCard from "../components/CharacterCard";
 
@@ -10,6 +10,7 @@ function RandomCharacter() {
     const [race, setRace] = useState({});
     const [charClass, setCharClass] = useState({});
     const [background, setBackground] = useState({});
+    //// condense to character as only state variable
     
     function randomIndex(array) {
         return Math.floor(Math.random() * array.length);
@@ -36,20 +37,20 @@ function RandomCharacter() {
                 const x = randomIndex(data.results)
                 const className = data.results[x].name
                 // archetype
+                //// make archetype separate function
                 const y = randomIndex(data.results[x].archetypes);
                 const archetype = data.results[x].archetypes[y];
                 const newCharClass = {
                     name: className,
                     archetype: {
                         name: archetype.name,
+                        //// swap out double split() for regexp as separator
                         desc: archetype.desc.split('##')[0].split('**')[0]
                     }
                 }
                 setCharClass(newCharClass)
         })
     }
-
-    // stretch: if adding reset for individual attributes, add setRandomArchetype()
 
     function setRandomBackground() {
         fetch(`https://api.open5e.com/backgrounds`)
