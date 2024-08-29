@@ -93,7 +93,11 @@ function RandomCharacter() {
     return (
         <>
             <h2>Random Character Page</h2>
-            <CharacterCard character={character} />
+            <CharacterCard character={{
+                race: race,
+                charClass: charClass,
+                background: background
+            }} />
         </>
     )
 }
