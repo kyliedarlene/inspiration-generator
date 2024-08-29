@@ -3,6 +3,7 @@ import {
     useEffect 
 } from "react";
 
+
 import CharacterCard from "../components/CharacterCard";
 
 function RandomCharacter() {
@@ -71,23 +72,6 @@ function RandomCharacter() {
         setRandomBackground();
     }, []);
     
-    const character = {
-        charClass: {
-            name: "druid",
-            desc: "in touch with mother nach",
-            archetype: {
-                name: "Circle of the Moon",
-                desc: "wildshapes like a baddie, owlbear pounces"
-            }
-        },
-        race: {
-            name: "halfling"
-        },
-        background: {
-            name: "sage",
-            desc: "learning about the natural world to share with her circle!"
-        }
-    }
     return (
         <>
             <h2>Random Character Page</h2>
@@ -104,22 +88,23 @@ export default RandomCharacter;
 
 
 
-// sample character:
+//// sample character:
 
 
-    //     const twig = {
-    //     class: {
-    //         name: "druid",
-    //         description: "in touch with mother nach",
-    //         subclass: {
-    //             name: "Circle of the Moon",
-    //             description: "wildshapes like a baddie, owlbear pounces"
-    //         }
-    //     },
-    //     race: {
-    //         name: "halfling"
-    //     },
-    //     background: {
-    //         name: "sage"
-    //     }
-    // }
+// const character = {
+//     charClass: {
+//         name: "druid",
+//         desc: "in touch with mother nach",
+//         archetype: {
+//             name: "Circle of the Moon",
+//             desc: "wildshapes like a baddie, owlbear pounces"
+//         }
+//     },
+//     race: {
+//         name: "halfling"
+//     },
+//     background: {
+//         name: "sage",
+//         desc: "learning about the natural world to share with her circle!"
+//     }
+// }
