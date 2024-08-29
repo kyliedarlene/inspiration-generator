@@ -34,16 +34,14 @@ function RandomCharacter() {
                 // class
                 const x = randomIndex(data.results)
                 const className = data.results[x].name
-                const classDesc = data.results[x].desc
                 // archetype
                 const y = randomIndex(data.results[x].archetypes);
                 const archetype = data.results[x].archetypes[y];
                 const newCharClass = {
                     name: className,
-                    desc: classDesc,
                     archetype: {
                         name: archetype.name,
-                        desc: archetype.desc
+                        desc: archetype.desc.split('##')[0].split('**')[0]
                     }
                 }
                 setCharClass(newCharClass)
@@ -58,7 +56,7 @@ function RandomCharacter() {
             .then((data) => {
                 const x = randomIndex(data.results)
                 const name = data.results[x].name
-                const desc = data.results[x].desc
+                const desc = data.results[x].desc.split('**')[0]
                 const newBackground = {
                     name: name,
                     desc: desc, 
