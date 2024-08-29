@@ -73,18 +73,27 @@ function RandomCharacter() {
         setRandomBackground();
     }, []);
     
-    console.log(charClass)
-
+    const character = {
+        charClass: {
+            name: "druid",
+            desc: "in touch with mother nach",
+            archetype: {
+                name: "Circle of the Moon",
+                desc: "wildshapes like a baddie, owlbear pounces"
+            }
+        },
+        race: {
+            name: "halfling"
+        },
+        background: {
+            name: "sage",
+            desc: "learning about the natural world to share with her circle!"
+        }
+    }
     return (
         <>
             <h2>Random Character Page</h2>
-            <CharacterCard />
-            {/* <h4>Race: {race.name}</h4>
-            <h4>Class: {charClass.name}</h4>
-            <h4>Subclass: {charClass.archetype ? charClass.archetype.name : null} </h4>
-            <h5>{charClass.archetype ? charClass.archetype.desc : null} </h5>
-            <h4>Backround: {background.name}</h4>
-            <h5>{background.desc}</h5> */}
+            <CharacterCard character={character} />
         </>
     )
 }

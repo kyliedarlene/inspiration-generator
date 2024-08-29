@@ -1,22 +1,4 @@
-function CharacterCard() {
-
-    const character = {
-        charClass: {
-            name: "druid",
-            desc: "in touch with mother nach",
-            archetype: {
-                name: "Circle of the Moon",
-                desc: "wildshapes like a baddie, owlbear pounces"
-            }
-        },
-        race: {
-            name: "halfling"
-        },
-        background: {
-            name: "sage",
-            desc: "learning about the natural world to share with her circle!"
-        }
-    }
+function CharacterCard({ character }) {
 
     return (
         <>
