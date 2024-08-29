@@ -3,6 +3,7 @@ import {
     useEffect 
 } from "react";
 
+import CharacterCard from "../components/CharacterCard";
 
 function RandomCharacter() {
     const [race, setRace] = useState({});
@@ -77,12 +78,13 @@ function RandomCharacter() {
     return (
         <>
             <h2>Random Character Page</h2>
-            <h4>Race: {race.name}</h4>
+            <CharacterCard />
+            {/* <h4>Race: {race.name}</h4>
             <h4>Class: {charClass.name}</h4>
             <h4>Subclass: {charClass.archetype ? charClass.archetype.name : null} </h4>
             <h5>{charClass.archetype ? charClass.archetype.desc : null} </h5>
             <h4>Backround: {background.name}</h4>
-            <h5>{background.desc}</h5>
+            <h5>{background.desc}</h5> */}
         </>
     )
 }
