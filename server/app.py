@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, make_response
+from flask import request, make_response, session
 from flask_restful import Resource
 from werkzeug.exceptions import NotFound
 
@@ -40,12 +40,18 @@ app.register_error_handler(404, handle_not_found)
 
 ### authentication ###
 
-# class Login(Resource):
+class Login(Resource):
     
-#     def post(self):
-#         pass
+    def post(self):
+        email = request.get_json()['email']
+        
+        user = User.query.filter(User.email == email).first()
 
-# api.add_resource(Login, '/login')
+        session['user_id'] = user.id
+        
+        return user.to_dict()
+
+api.add_resource(Login, '/login')
 
 ### characters ###
 
