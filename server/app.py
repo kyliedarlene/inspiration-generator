@@ -17,9 +17,7 @@ class Home(Resource):
 
     def get(self):
         response = make_response(
-            {
-                "message": "Inspiration Generator API"
-            },
+            { "message": "Inspiration Generator API" },
             200
         )
         return response
@@ -42,7 +40,12 @@ app.register_error_handler(404, handle_not_found)
 
 ### authentication ###
 
+# class Login(Resource):
+    
+#     def post(self):
+#         pass
 
+# api.add_resource(Login, '/login')
 
 ### characters ###
 
