@@ -53,9 +53,36 @@ def characters():
                 { "errors": ['Please try again.'] }, 
                 400
             )
-
     return response
 
+
+@app.route('/characters/<int:id>', methods = ['GET', 'DELETE'])
+def character_by_id(id):
+    character = Character.query.filter(Character.id == id).first()
+
+    if not character:
+        response = make_response(
+            {"error": "Character not found"}, 
+            404
+        )
+    else:
+        if request.method == 'GET':
+            response = make_response(
+                character.to_dict(),
+                200
+            )
+        elif request.method == 'DELETE':
+            db.session.delete(character)
+            db.session.commit()
+            response = make_response(
+                { 
+                    "delete_successful": True, 
+                    "message": "Character deleted." 
+                },
+                200
+            )
+
+    return response
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
