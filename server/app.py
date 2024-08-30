@@ -123,6 +123,22 @@ class CharacterByID(Resource):
             )
         
         return response
+    
+    def patch(self, id):
+        character = Character.query.filter(Character.id == id).first()
+        
+        form_data = request.get_json()
+
+        for attr in form_data:
+            setattr(character, attr, form_data[attr])
+
+        db.session.commit()
+        response = make_response(
+            character.to_dict(), 
+            202
+        )
+
+        return response
 
 api.add_resource(CharacterByID, '/characters/<int:id>')
 
