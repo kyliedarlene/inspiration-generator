@@ -53,7 +53,15 @@ class Login(Resource):
 
 api.add_resource(Login, '/login')
 
-### characters ###
+class Logout(Resource):
+
+    def delete(self):
+        session['user_id'] = None
+        return {'message': '204: No Content'}, 204
+    
+api.add_resource(Logout, '/logout')
+
+### Characters ###
 
 class Characters(Resource):
 
