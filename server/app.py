@@ -126,7 +126,7 @@ class CharacterByID(Resource):
     
     def patch(self, id):
         character = Character.query.filter(Character.id == id).first()
-        
+
         form_data = request.get_json()
 
         for attr in form_data:
@@ -136,6 +136,21 @@ class CharacterByID(Resource):
         response = make_response(
             character.to_dict(), 
             202
+        )
+
+        return response
+    
+    def delete(self, id):
+        character = Character.query.filter(Character.id == id).first()
+
+        db.session.delete(character)
+        db.session.commit()
+        response = make_response(
+            { 
+                "delete_successful": True, 
+                "message": "Character deleted." 
+            },
+            200
         )
 
         return response
