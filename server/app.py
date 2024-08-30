@@ -5,6 +5,7 @@
 # Remote library imports
 from flask import request, make_response
 from flask_restful import Resource
+from werkzeug.exceptions import NotFound
 
 # Local imports
 from config import app, db, api
@@ -105,54 +106,71 @@ api.add_resource(Characters, '/characters')
 #             )
 #     return response
 
+class CharacterByID(Resource):
 
-@app.route('/characters/<int:id>', methods = ['GET', 'PATCH', 'DELETE'])
-def character_by_id(id):
-    character = Character.query.filter(Character.id == id).first()
+    def get(self, id):
+        character = Character.query.filter(Character.id == id).first()
 
-    if not character:
-        response = make_response(
-            {"error": "Character not found"}, 
-            404
-        )
-    else:
-        if request.method == 'GET':
+        if not character:
+            response = make_response(
+                { "error": "Character not found." },
+                404
+            )
+        else:
             response = make_response(
                 character.to_dict(),
                 200
             )
-        elif request.method == 'PATCH':
-            try:
-                form_data = request.get_json()
+        
+        return response
 
-                for attr in form_data:
-                    setattr(character, attr, form_data[attr])
-
-                db.session.commit()
-                response = make_response(
-                    character.to_dict(), 
-                    202
-                )
-            except ValueError:
-                response = make_response(
-                    { "errors": ["validation errors"] }, 
-                    400
-                )
-        elif request.method == 'DELETE':
-            db.session.delete(character)
-            db.session.commit()
-            response = make_response(
-                { 
-                    "delete_successful": True, 
-                    "message": "Character deleted." 
-                },
-                200
-            )
-
-    return response
+api.add_resource(CharacterByID, '/characters/<int:id>')
 
 
+# @app.route('/characters/<int:id>', methods = ['GET', 'PATCH', 'DELETE'])
+# def character_by_id(id):
+#     character = Character.query.filter(Character.id == id).first()
 
+#     if not character:
+#         response = make_response(
+#             {"error": "Character not found"}, 
+#             404
+#         )
+#     else:
+#         if request.method == 'GET':
+#             response = make_response(
+#                 character.to_dict(),
+#                 200
+#             )
+#         elif request.method == 'PATCH':
+#             try:
+#                 form_data = request.get_json()
+
+#                 for attr in form_data:
+#                     setattr(character, attr, form_data[attr])
+
+#                 db.session.commit()
+#                 response = make_response(
+#                     character.to_dict(), 
+#                     202
+#                 )
+#             except ValueError:
+#                 response = make_response(
+#                     { "errors": ["validation errors"] }, 
+#                     400
+#                 )
+#         elif request.method == 'DELETE':
+#             db.session.delete(character)
+#             db.session.commit()
+#             response = make_response(
+#                 { 
+#                     "delete_successful": True, 
+#                     "message": "Character deleted." 
+#                 },
+#                 200
+#             )
+
+#     return response
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
