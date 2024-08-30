@@ -26,6 +26,20 @@ class Home(Resource):
     
 api.add_resource(Home, '/')
 
+### error handling ###
+
+@app.errorhandler(NotFound)
+def handle_not_found(e):
+
+    response = make_response(
+        "Not Found: The requested resource does not exist.",
+        404
+    )
+
+    return response
+
+app.register_error_handler(404, handle_not_found)
+
 ### authentication ###
 
 
@@ -85,31 +99,43 @@ class CharacterByID(Resource):
     def patch(self, id):
         character = Character.query.filter(Character.id == id).first()
 
-        form_data = request.get_json()
+        if not character:
+            response = make_response(
+                { "error": "Character not found." },
+                404
+            )
+        else:
+            form_data = request.get_json()
 
-        for attr in form_data:
-            setattr(character, attr, form_data[attr])
+            for attr in form_data:
+                setattr(character, attr, form_data[attr])
 
-        db.session.commit()
-        response = make_response(
-            character.to_dict(), 
-            202
-        )
+            db.session.commit()
+            response = make_response(
+                character.to_dict(), 
+                202
+            )
 
         return response
     
     def delete(self, id):
         character = Character.query.filter(Character.id == id).first()
 
-        db.session.delete(character)
-        db.session.commit()
-        response = make_response(
-            { 
-                "delete_successful": True, 
-                "message": "Character deleted." 
-            },
-            200
-        )
+        if not character:
+            response = make_response(
+                { "error": "Character not found." },
+                404
+            )
+        else:
+            db.session.delete(character)
+            db.session.commit()
+            response = make_response(
+                { 
+                    "delete_successful": True, 
+                    "message": "Character deleted." 
+                },
+                200
+            )
 
         return response
 
