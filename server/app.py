@@ -38,12 +38,29 @@ api.add_resource(Home, '/')
 class Characters(Resource):
 
     def get(self):
-
         characters = [character.to_dict() for character in Character.query.all()]
 
         response = make_response(
             characters,
             200
+        )
+
+        return response
+    
+    def post(self):
+        form_data = request.get_json()
+
+        new_character = Character()
+        for attr in dir(Character):
+            if attr in form_data:
+                setattr(new_character, attr, form_data[attr])
+
+        db.session.add(new_character)
+        db.session.commit()
+
+        response = make_response(
+            new_character.to_dict(),
+            201
         )
 
         return response
