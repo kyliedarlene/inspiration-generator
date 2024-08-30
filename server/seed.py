@@ -97,7 +97,8 @@ if __name__ == '__main__':
         new_users = [
             User(
                 username = "kylie",
-                email = "kyliedarlene@icloud.com"
+                email = "kyliedarlene@icloud.com",
+                password_hash = "password"
             )
         ]
 

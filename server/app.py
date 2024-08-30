@@ -40,27 +40,51 @@ app.register_error_handler(404, handle_not_found)
 
 ### authentication ###
 
-class CheckSession(Resource):
-    
-    def get(self):
-        user = User.query.filter(User.id == session.get('user_id')).first()
-        if not user:
-            return make_response({'message': "401: Not Authorized"}, 401)
-        else:
-            return make_response(user.to_dict(), 200)
+class Signup(Resource):
 
-api.add_resource(CheckSession, '/check_session')
+    def post(self):
+        
+        email = request.get_json()['email']
+        username = request.get_json()['username']
+        password = request.get_json()['password']
+
+        new_user = User(
+            email=email,
+            username=username,
+            password_hash=password,
+        )
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        return make_response(
+            new_user.to_dict(),
+            201
+        )
+    
+api.add_resource(Signup, '/signup')
 
 class Login(Resource):
     
     def post(self):
         email = request.get_json()['email']
+        password = request.get_json()['password']
         
         user = User.query.filter(User.email == email).first()
 
-        session['user_id'] = user.id
-        
-        return user.to_dict()
+        if user.authenticate(password):
+            session['user_id'] = user.id
+            response = make_response(
+                user.to_dict(),
+                200
+            )
+        else: 
+            response = make_response(
+                {'error': 'Invalid username or password'},
+                401
+            )
+
+        return response
 
 api.add_resource(Login, '/login')
 
@@ -71,6 +95,17 @@ class Logout(Resource):
         return {}, 204
     
 api.add_resource(Logout, '/logout')
+
+class CheckSession(Resource):
+    
+    def get(self):
+        user = User.query.filter(User.id == session.get('user_id')).first()
+        if not user:
+            return make_response({'message': "401: Not Authorized"}, 401)
+        else:
+            return make_response(user.to_dict(), 200)
+        
+api.add_resource(CheckSession, '/check_session')
 
 ### Characters ###
 
