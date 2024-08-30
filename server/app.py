@@ -56,7 +56,7 @@ def characters():
     return response
 
 
-@app.route('/characters/<int:id>', methods = ['GET', 'DELETE'])
+@app.route('/characters/<int:id>', methods = ['GET', 'PATCH', 'DELETE'])
 def character_by_id(id):
     character = Character.query.filter(Character.id == id).first()
 
@@ -71,6 +71,23 @@ def character_by_id(id):
                 character.to_dict(),
                 200
             )
+        elif request.method == 'PATCH':
+            try:
+                form_data = request.get_json()
+
+                for attr in form_data:
+                    setattr(character, attr, form_data[attr])
+
+                db.session.commit()
+                response = make_response(
+                    character.to_dict(), 
+                    202
+                )
+            except ValueError:
+                response = make_response(
+                    { "errors": ["validation errors"] }, 
+                    400
+                )
         elif request.method == 'DELETE':
             db.session.delete(character)
             db.session.commit()
