@@ -6,7 +6,7 @@ from config import db, bcrypt
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String)
     email = db.Column(db.String)
@@ -36,3 +36,4 @@ class Character(db.Model, SerializerMixin):
     arch_desc = db.Column(db.String)
     bkd_name = db.Column(db.String)
     bkd_desc = db.Column(db.String)
+    is_favorite = db.Column(db.Boolean, default=False)
