@@ -40,6 +40,17 @@ app.register_error_handler(404, handle_not_found)
 
 ### authentication ###
 
+class CheckSession(Resource):
+    
+    def get(self):
+        user = User.query.filter(User.id == session.get('user_id')).first()
+        if not user:
+            return make_response({'message': "401: Not Authorized"}, 401)
+        else:
+            return make_response(user.to_dict(), 200)
+
+api.add_resource(CheckSession, '/check_session')
+
 class Login(Resource):
     
     def post(self):
@@ -57,7 +68,7 @@ class Logout(Resource):
 
     def delete(self):
         session['user_id'] = None
-        return {'message': '204: No Content'}, 204
+        return {}, 204
     
 api.add_resource(Logout, '/logout')
 
