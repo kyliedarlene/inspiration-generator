@@ -18,6 +18,7 @@ if __name__ == '__main__':
 
         # delete db data
         Character.query.delete()
+        User.query.delete()
         print("db data deleted")
 
         ### characters ###
@@ -92,3 +93,14 @@ if __name__ == '__main__':
         db.session.add_all(new_chars)
         db.session.commit()
         print("seeded characters")
+
+        new_users = [
+            User(
+                username = "kylie",
+                email = "kyliedarlene@icloud.com"
+            )
+        ]
+
+        db.session.add_all(new_users)
+        db.session.commit()
+        print("seeded users")
