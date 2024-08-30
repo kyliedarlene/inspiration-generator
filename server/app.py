@@ -13,9 +13,26 @@ from models import *
 
 # Views go here!
 
-@app.route('/')
-def index():
-    return '<h1>Inspiration Generator API</h1>'
+# @app.route('/')
+# def index():
+#     return '<h1>Inspiration Generator API</h1>'
+
+class Home(Resource):
+
+    def get(self):
+        response = make_response(
+            {
+                "message": "Inspiration Generator API"
+            },
+            200
+        )
+        return response
+    
+api.add_resource(Home, '/')
+
+### authentication ###
+
+
 
 @app.route('/characters', methods = ['GET', 'POST'])
 def characters():
@@ -100,6 +117,9 @@ def character_by_id(id):
             )
 
     return response
+
+
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
