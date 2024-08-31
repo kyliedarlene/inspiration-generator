@@ -45,8 +45,11 @@ class Signup(Resource):
     def post(self):
         
         email = request.get_json()['email']
+        # improvement: add email validation (preferably in model?)
         username = request.get_json()['username']
+        # improvement: add username constraints
         password = request.get_json()['password']
+        # improvement: add password requirements
 
         new_user = User(
             email=email,
@@ -128,6 +131,8 @@ class UserById(Resource):
     def get(self, id):
         user = User.query.filter(User.id == id).first()
 
+        # add: error handling
+
         return make_response(
             user.to_dict(),
             200
@@ -157,7 +162,8 @@ class Characters(Resource):
             if attr in form_data:
                 setattr(new_character, attr, form_data[attr])
 
-        # new_character.user_id = session.user.id (?)
+        # q: new_character.user_id = session.user.id (?)
+        # q: what would error handling mean here?
 
         db.session.add(new_character)
         db.session.commit()
