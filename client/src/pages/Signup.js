@@ -14,7 +14,23 @@ function Signup() {
             body: JSON.stringify(values)
         })
         .then((r) => r.json())
-        .then((user) => console.log(user))
+        .then((user) => console.log(`Logged in ${user.username}!`))
+    }
+
+    function signup(values) {
+        fetch('/signup', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+            // note to self: did not include replacer or space params for .stringify()
+        })
+            .then((r) => r.json())
+            .then((user) => {
+                console.log(`Signed up ${user.username}!`)
+                login(values)
+            })
     }
     
     const formSchema = yup.object().shape({
@@ -31,21 +47,7 @@ function Signup() {
             password: "",
         },
         validationSchema: formSchema,
-        onSubmit: (values) => {
-            console.log(values)
-            fetch('/signup', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(values),
-                // note to self: did not include replacer or space params for .stringify()
-            })
-                .then(() => {
-                    console.log(`Signed up ${values.username}!`)
-                    login(values)
-                })
-        }
+        onSubmit: (values) => signup(values)
     })
 
       return (
