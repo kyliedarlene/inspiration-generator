@@ -131,12 +131,16 @@ class UserById(Resource):
     def get(self, id):
         user = User.query.filter(User.id == id).first()
 
-        # add: error handling
-
-        return make_response(
-            user.to_dict(),
-            200
-        )
+        if user:
+            return make_response(
+                user.to_dict(),
+                200
+            )  
+        else:
+            return make_response(
+                { "error": "User not found." },
+                404
+            )
 
 api.add_resource(UserById, '/users/<int:id>')
 
