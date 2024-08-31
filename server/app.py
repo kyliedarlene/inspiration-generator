@@ -182,19 +182,17 @@ class CharacterById(Resource):
     def get(self, id):
         character = Character.query.filter(Character.id == id).first()
 
-        if not character:
-            response = make_response(
+        if character:
+            return make_response(
+                character.to_dict(),
+                200
+            )  
+        else:
+            return make_response(
                 { "error": "Character not found." },
                 404
             )
-        else:
-            response = make_response(
-                character.to_dict(),
-                200
-            )
-        
-        return response
-    
+            
     def patch(self, id):
         character = Character.query.filter(Character.id == id).first()
 
