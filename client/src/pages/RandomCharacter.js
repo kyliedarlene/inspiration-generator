@@ -2,7 +2,6 @@ import {
     useState, 
     useEffect 
 } from "react";
-import { Link } from "react-router-dom";
 
 import CharacterCard from "../components/CharacterCard";
 
@@ -10,7 +9,6 @@ function RandomCharacter() {
     const [race, setRace] = useState({});
     const [charClass, setCharClass] = useState({});
     const [background, setBackground] = useState({});
-    //// condense to character as only state variable?
     
     function randomIndex(array) {
         return Math.floor(Math.random() * array.length);
@@ -44,7 +42,7 @@ function RandomCharacter() {
                     name: className,
                     archetype: {
                         name: archetype.name,
-                        //// swap out double split() for regexp as separator
+                        //// swap out double split() for regexp as separator, make separate function for trimming sentences?
                         desc: archetype.desc.split('##')[0].split('**')[0]
                     }
                 }
