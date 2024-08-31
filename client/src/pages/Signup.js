@@ -12,7 +12,7 @@ function Signup() {
         password: yup.string().required().password()
     });
     
-      const formik = useFormik({
+    const formik = useFormik({
         initialValues: {
             username: "",
             email: "",
@@ -24,14 +24,23 @@ function Signup() {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                  },
+                },
                 body: JSON.stringify(values),
                 // note to self: did not include replacer or space params for .stringify()
             })
                 .then((r) => r.json())
-                .then((data) => console.log(data))
-        },
-      })
+                .then((user) => {
+                    console.log(user) // remove this later
+                    fetch('/login', {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(values)
+                    })
+                })
+        }
+    })
 
       return (
         <div>
