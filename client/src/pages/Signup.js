@@ -5,11 +5,14 @@ function Signup() {
 
     const formSchema = yup.object().shape({
         username: yup
-            .string(),
+            .string()
+            .required("Must enter a username.")
+            .min(2, "Username must contain at least 2 letters.")
+            .max(20, "Username can contain no more than 20 characters."),
         email: yup
             .string()
-            .email("Invalid email")
-            .required("Must enter email"),
+            .email("Please enter a valid email address.")
+            .required("Must enter a valid email address."),
         password: yup
             .string()
     });
@@ -48,7 +51,7 @@ function Signup() {
               onChange={formik.handleChange}
               value={formik.values.username}
             />
-            <p style={{ color: "red" }}> {formik.errors.email}</p>
+            <p style={{ color: "red" }}> {formik.errors.username}</p>
 
             <label htmlFor="email">Email</label>
             <br />
