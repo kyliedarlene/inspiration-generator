@@ -107,6 +107,22 @@ class CheckSession(Resource):
         
 api.add_resource(CheckSession, '/check_session')
 
+### Users ###
+
+class Users(Resource):
+
+    def get(self):
+        users = [user.to_dict() for user in User.query.all()]
+
+        response = make_response(
+            users,
+            200
+        )
+
+        return response
+
+api.add_resource(Users, '/users')
+
 ### Characters ###
 
 class Characters(Resource):
@@ -128,6 +144,8 @@ class Characters(Resource):
         for attr in dir(Character):
             if attr in form_data:
                 setattr(new_character, attr, form_data[attr])
+
+        # new_character.user_id = session.user.id (?)
 
         db.session.add(new_character)
         db.session.commit()
