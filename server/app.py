@@ -123,7 +123,17 @@ class Users(Resource):
 
 api.add_resource(Users, '/users')
 
-# class UserById
+class UserById(Resource):
+
+    def get(self, id):
+        user = User.query.filter(User.id == id).first()
+
+        return make_response(
+            user.to_dict(),
+            200
+        )
+
+api.add_resource(UserById, '/users/<int:id>')
 
 ### Characters ###
 
