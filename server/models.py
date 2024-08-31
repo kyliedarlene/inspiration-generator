@@ -14,7 +14,7 @@ class User(db.Model, SerializerMixin):
 
     characters = db.relationship('Character')
 
-    serialize_rules = ('-characters.user',)
+    serialize_rules = ('-_password_hash', '-characters.user',)
 
     @hybrid_property
     def password_hash(self):
@@ -45,4 +45,4 @@ class Character(db.Model, SerializerMixin):
 
     user = db.relationship('User', back_populates="characters")
 
-    serialize_rules = ('-user.characters',)
+    serialize_rules = ('-user_id', '-user.characters',)
