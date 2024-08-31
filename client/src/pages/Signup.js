@@ -22,7 +22,16 @@ function Signup() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            console.log("Submitted")
+            fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                  },
+                body: JSON.stringify(values),
+                // note to self: did not include replacer or space params for .stringify()
+            })
+                .then((r) => r.json())
+                .then((data) => console.log(data))
         },
       })
 
