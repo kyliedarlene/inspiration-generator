@@ -21,6 +21,25 @@ if __name__ == '__main__':
         User.query.delete()
         print("db data deleted")
 
+        ### users ###
+
+        new_users = [
+            User(
+                username = "kylie",
+                email = "kylie@email.com",
+                password_hash = "password1"
+            ),
+            User(
+                username = "mitch",
+                email = "mitch@email.com",
+                password_hash = "password2"
+            )
+        ]
+
+        db.session.add_all(new_users)
+        db.session.commit()
+        print("seeded users")
+
         ### characters ###
 
         new_chars = [
@@ -61,7 +80,7 @@ if __name__ == '__main__':
                 bkd_desc = "Duty is a complicated, tangled affair, be it filial, political, or civil. Sometimes, there's wealth and intrigue involved, but more often than not, there's also obligation and responsibility. You are a person with just such a responsibility. This could involve a noble title, an arranged marriage, a family business you're expected to administer, or an inherited civil office. You promised to fulfill this responsibility, you are desperately trying to avoid this duty, or you might even be seeking the person intended to be at your side. Regardless of the reason, you're on the road, heading toward or away from your destiny.",
             ),
             Character(
-                user_id = 1,
+                user_id = 2,
                 race_name = "Half-Orc",
                 cls_name = "Barbarian",
                 arch_name = "Path of Hellfire",
@@ -70,8 +89,8 @@ if __name__ == '__main__':
                 bkd_desc = "You lived far from the farms and fields of civilization. You know the beauties and the dangers of the wilderness. Were you part of a nomadic tribe? A hunter or guide? A lone wanderer or explorer? A guardian of civilization against monsters, or of the old ways against civilization?",
             ),
             Character(
-                user_id = 1,
-                race_name = "Erina",
+                user_id = 2,
+                race_name = "Halfling",
                 cls_name = "Monk",
                 arch_name = "Way of the Unerring Arrow",
                 arch_desc = "The inner peace of contemplation, the artistry of focused breathing, and the calm awareness which leads to pinpoint accuracy all contribute to the Way of the Unerring Arrow. Some are dedicated soldiers, others walk the path of a wandering warrior-mendicant, but all of them hone their art of self-control, spirituality, and the martial arts, combining unarmed combat with archery. Select this tradition if you want to play a character who is as comfortable trading kicks and blows as they are with snatching an arrow from the air and firing it back in a single motion.",
@@ -79,7 +98,7 @@ if __name__ == '__main__':
                 bkd_desc = "You are educated and ambitious. You spent your youth apprenticed among a city's more reputable greenhouses, laboratories, and perfumeries. There, you studied botany and chemistry and explored properties and interactions with fine crystal, rare metals, and magic. You quickly mastered the skills to identify and process rare and complex botanical and alchemical samples and the proper extractions and infusions of essential oils, pollens, and other fragrant chemical compounds—natural or otherwise. Not all (dramatic) changes to one's lifestyle, calling, or ambitions are a result of social or financial decline. Some are simply decided upon. Regardless of your motivation or incentive for change, you have accepted that a comfortable life of research, science and business is—at least for now—a part of your past.",
             ),
             Character(
-                user_id = 1,
+                user_id = 2,
                 race_name = "Gnome",
                 cls_name = "Cleric",
                 arch_name = "Blood Domain",
@@ -88,7 +107,7 @@ if __name__ == '__main__':
                 bkd_desc = "You were born to a commoner family, but some event earned you fame. You're admired locally, and tales of your deeds have reached the far corners of the world. Did you win your fame by battling an oppressive tyrant? Saving your village from a monster? Or by something more prosaic like winning a wrestling bout or a pie-eating contest?",
             ),
             Character(
-                user_id = 1,
+                user_id = 2,
                 race_name = "Gearforged",
                 cls_name = "Bard",
                 arch_name = "College of Echoes",
@@ -101,15 +120,3 @@ if __name__ == '__main__':
         db.session.add_all(new_chars)
         db.session.commit()
         print("seeded characters")
-
-        new_users = [
-            User(
-                username = "kylie",
-                email = "kyliedarlene@icloud.com",
-                password_hash = "password"
-            )
-        ]
-
-        db.session.add_all(new_users)
-        db.session.commit()
-        print("seeded users")
