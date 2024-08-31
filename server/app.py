@@ -123,6 +123,8 @@ class Users(Resource):
 
 api.add_resource(Users, '/users')
 
+# class UserById
+
 ### Characters ###
 
 class Characters(Resource):
@@ -159,7 +161,7 @@ class Characters(Resource):
     
 api.add_resource(Characters, '/characters')
 
-class CharacterByID(Resource):
+class CharacterById(Resource):
 
     def get(self, id):
         character = Character.query.filter(Character.id == id).first()
@@ -220,7 +222,7 @@ class CharacterByID(Resource):
 
         return response
 
-api.add_resource(CharacterByID, '/characters/<int:id>')
+api.add_resource(CharacterById, '/characters/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
