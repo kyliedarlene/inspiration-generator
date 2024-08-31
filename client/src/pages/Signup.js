@@ -6,21 +6,12 @@ YupPassword(yup)
 function Signup() {
 
     const formSchema = yup.object().shape({
-        username: yup
-            .string()
-            .required("Must enter username.")
-            .min(2, "Username must contain at least 2 letters.")
-            .max(20, "Username can contain no more than 20 characters."),
-        email: yup
-            .string()
-            .email("Please enter a valid email address.")
-            .required("Must enter email address."),
-        password: yup
-            .string()
-            .required()
-            .password()
+        // improvement: username and email don't show error msg until submit
+        username: yup.string().required().min(2).max(20),
+        email: yup.string().email().required(),
+        password: yup.string().required().password()
     });
-
+    
       const formik = useFormik({
         initialValues: {
             username: "",
