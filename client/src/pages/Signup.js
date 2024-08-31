@@ -5,6 +5,18 @@ YupPassword(yup)
 
 function Signup() {
 
+    function login(values) {
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values)
+        })
+        .then((r) => r.json())
+        .then((user) => console.log(user))
+    }
+    
     const formSchema = yup.object().shape({
         // improvement: username and email don't show error msg until submit
         username: yup.string().required().min(2).max(20),
@@ -20,6 +32,7 @@ function Signup() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
+            console.log(values)
             fetch('/signup', {
                 method: 'POST',
                 headers: {
@@ -28,16 +41,9 @@ function Signup() {
                 body: JSON.stringify(values),
                 // note to self: did not include replacer or space params for .stringify()
             })
-                .then((r) => r.json())
-                .then((user) => {
-                    console.log(user) // remove this later
-                    fetch('/login', {
-                        method: 'POST',
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(values)
-                    })
+                .then(() => {
+                    console.log(`Signed up ${values.username}!`)
+                    login(values)
                 })
         }
     })
