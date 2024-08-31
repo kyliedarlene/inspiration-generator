@@ -25,6 +25,7 @@ if __name__ == '__main__':
 
         new_chars = [
             Character(
+                user_id = 1,
                 race_name = "Drow",
                 cls_name = "Ranger",
                 arch_name = "Snake Speaker",
@@ -33,6 +34,7 @@ if __name__ == '__main__':
                 bkd_desc = "You served your apprenticeship among merchants and traders. You've traveled dusty miles and haggled under distant skies. Why are you living a life of adventure? Are you working off your debt to the company store? Are you escorting a caravan through dangerous wilds? Are you raising capital to start your own business, or trying to restore the fortunes of a ruined trading family? Or are you a smuggler, following secret trade routes unknown to the authorities?",
             ),
             Character(
+                user_id = 1,
                 race_name = "Half-Orc",
                 cls_name = "Fighter",
                 arch_name = "Champion",
@@ -41,6 +43,7 @@ if __name__ == '__main__':
                 bkd_desc = "Even though you are independent now, you were once a servant to a merchant, noble, regent, or other person of high station. You are an expert in complex social dynamics and knowledgeable in the history and customs of courtly life. Work with your GM to determine whom you served and why you are no longer a servant: did your master or masters retire and no longer require servants, did you resign from the service of a harsh master, did the court you served fall to a neighboring empire, or did something else happen?",
             ),
             Character(
+                user_id = 1,
                 race_name = "Satarre",
                 cls_name = "Monk",
                 arch_name = "Way of the Wildcat",
@@ -49,6 +52,7 @@ if __name__ == '__main__':
                 bkd_desc = "You haven't met your match at dice or cards. A career of high stakes and daring escapades has taught you when to play close to the chest and when to risk it all—but you haven't yet learned when to walk away. Are you a brilliant student of the game, a charming master of the bluff and counterbluff, or a cheater with fast hands? What turned you to a life of adventure: a string of bad luck, or an insatiable thirst for risk?",
             ),
             Character(
+                user_id = 1,
                 race_name = "Erina",
                 cls_name = "Sorcerer",
                 arch_name = "Hungering",
@@ -57,6 +61,7 @@ if __name__ == '__main__':
                 bkd_desc = "Duty is a complicated, tangled affair, be it filial, political, or civil. Sometimes, there's wealth and intrigue involved, but more often than not, there's also obligation and responsibility. You are a person with just such a responsibility. This could involve a noble title, an arranged marriage, a family business you're expected to administer, or an inherited civil office. You promised to fulfill this responsibility, you are desperately trying to avoid this duty, or you might even be seeking the person intended to be at your side. Regardless of the reason, you're on the road, heading toward or away from your destiny.",
             ),
             Character(
+                user_id = 1,
                 race_name = "Half-Orc",
                 cls_name = "Barbarian",
                 arch_name = "Path of Hellfire",
@@ -65,6 +70,7 @@ if __name__ == '__main__':
                 bkd_desc = "You lived far from the farms and fields of civilization. You know the beauties and the dangers of the wilderness. Were you part of a nomadic tribe? A hunter or guide? A lone wanderer or explorer? A guardian of civilization against monsters, or of the old ways against civilization?",
             ),
             Character(
+                user_id = 1,
                 race_name = "Erina",
                 cls_name = "Monk",
                 arch_name = "Way of the Unerring Arrow",
@@ -73,6 +79,7 @@ if __name__ == '__main__':
                 bkd_desc = "You are educated and ambitious. You spent your youth apprenticed among a city's more reputable greenhouses, laboratories, and perfumeries. There, you studied botany and chemistry and explored properties and interactions with fine crystal, rare metals, and magic. You quickly mastered the skills to identify and process rare and complex botanical and alchemical samples and the proper extractions and infusions of essential oils, pollens, and other fragrant chemical compounds—natural or otherwise. Not all (dramatic) changes to one's lifestyle, calling, or ambitions are a result of social or financial decline. Some are simply decided upon. Regardless of your motivation or incentive for change, you have accepted that a comfortable life of research, science and business is—at least for now—a part of your past.",
             ),
             Character(
+                user_id = 1,
                 race_name = "Gnome",
                 cls_name = "Cleric",
                 arch_name = "Blood Domain",
@@ -81,6 +88,7 @@ if __name__ == '__main__':
                 bkd_desc = "You were born to a commoner family, but some event earned you fame. You're admired locally, and tales of your deeds have reached the far corners of the world. Did you win your fame by battling an oppressive tyrant? Saving your village from a monster? Or by something more prosaic like winning a wrestling bout or a pie-eating contest?",
             ),
             Character(
+                user_id = 1,
                 race_name = "Gearforged",
                 cls_name = "Bard",
                 arch_name = "College of Echoes",

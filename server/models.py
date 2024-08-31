@@ -12,6 +12,10 @@ class User(db.Model, SerializerMixin):
     email = db.Column(db.String)
     _password_hash = db.Column(db.String)
 
+    characters = db.relationship('Character')
+
+    serialize_rules = ('-characters.user',)
+
     @hybrid_property
     def password_hash(self):
         return self._password_hash
@@ -37,3 +41,8 @@ class Character(db.Model, SerializerMixin):
     bkd_name = db.Column(db.String)
     bkd_desc = db.Column(db.String)
     is_favorite = db.Column(db.Boolean, default=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    user = db.relationship('User', back_populates="characters")
+
+    serialize_rules = ('-user.characters',)
