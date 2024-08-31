@@ -1,20 +1,24 @@
-import { useFormik } from "formik";
-import * as yup from "yup";
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import YupPassword from 'yup-password'
+YupPassword(yup)
 
 function Signup() {
 
     const formSchema = yup.object().shape({
         username: yup
             .string()
-            .required("Must enter a username.")
+            .required("Must enter username.")
             .min(2, "Username must contain at least 2 letters.")
             .max(20, "Username can contain no more than 20 characters."),
         email: yup
             .string()
             .email("Please enter a valid email address.")
-            .required("Must enter a valid email address."),
+            .required("Must enter email address."),
         password: yup
             .string()
+            .required()
+            .password()
     });
 
       const formik = useFormik({
