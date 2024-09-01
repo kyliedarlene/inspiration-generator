@@ -1,4 +1,6 @@
+import { UserContext } from "../context/user";
 
+import React, { useContext } from "react";
 import { Navigate, useNavigate} from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -7,6 +9,9 @@ YupPassword(yup)
 
 function Signup() {
     const navigate = useNavigate();
+    // const {user, setUser} = useContext(UserContext);
+    const user = useContext(UserContext);
+
 
     function login(values) {
         fetch('/login', {
@@ -56,12 +61,14 @@ function Signup() {
             password: "",
         },
         validationSchema: formSchema,
-        onSubmit: (values) => signup(values)
+        // onSubmit: (values) => signup(values)
+        // onSubmit: () => setUser()
     })
 
       return (
         <div>
           <h1>Signup</h1>
+          <h2>Context: {user} </h2>
           <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
 
             <label htmlFor="username">Username</label>
