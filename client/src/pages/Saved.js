@@ -3,15 +3,17 @@ import { UserContext } from "../context/user";
 
 function Saved() {
     const {user} = useContext(UserContext)
-    const [characters, setCharacters] = useState([])
+    const [savedChars, setSavedChars] = useState([])
 
     // useEffect(() => {
     //     fetch(`/users/${user.id}`)
     //         .then((r) => r.json())
-    //         .then((u) => setCharacters(chars))
+    //         .then((u) => setSavedChars(u.characters))
     // }, [])
 
-    console.log(user)
+    useEffect(() => setSavedChars(user.characters), [])
+
+    console.log(savedChars)
 
     return(
         <h1>Saved Characters</h1>
