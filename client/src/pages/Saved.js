@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/user";
+import CharacterCard from "../components/CharacterCard";
 
 function Saved() {
     const {user} = useContext(UserContext)
-    const [savedChars, setSavedChars] = useState([])
+    // const [savedChars, setSavedChars] = useState([])
 
     // useEffect(() => {
     //     fetch(`/users/${user.id}`)
@@ -11,12 +12,39 @@ function Saved() {
     //         .then((u) => setSavedChars(u.characters))
     // }, [])
 
-    useEffect(() => setSavedChars(user.characters), [])
+    // useEffect(() => setSavedChars(user.characters), [])
 
-    console.log(savedChars)
+    const characters = user.characters;
+
+    function restructureChar(char) {
+        return {
+            race: {
+                name: char.race_name,
+            },
+            charClass: {
+                name: char.cls_name,
+                archetype: {
+                    name: char.arch_name,
+                    desc: char.arch_desc
+                }
+            },
+            background: {
+                name: char.bkd_name,
+                desc: char.bkd_desc
+            }
+        }
+    }
 
     return(
-        <h1>Saved Characters</h1>
+        <>
+            <h1>Saved Characters</h1>
+            {characters ? 
+                characters.map((char) => (
+                        <CharacterCard key={char.id} character={restructureChar(char)} />
+                ))
+                : null
+            }
+        </>
     )
 
 }
