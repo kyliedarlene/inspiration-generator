@@ -1,5 +1,5 @@
 
-import { useNavigate} from "react-router-dom";
+import { Navigate, useNavigate} from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password'
@@ -22,6 +22,7 @@ function Signup() {
             navigate('/')
             // think through how redirect will work with saved char in state
                 // maybe auto redirect should be in onSubmit, or the right page submitted as param
+            // add user in context ? 
         })
     }
 
