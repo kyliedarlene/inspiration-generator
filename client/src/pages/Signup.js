@@ -9,25 +9,9 @@ YupPassword(yup)
 
 function Signup() {
     const navigate = useNavigate();
-    const {user, setUser, login} = useContext(UserContext);
+    const {user, setUser, login, signup} = useContext(UserContext);
 
     console.log(user)
-    
-    function signup(values) {
-        fetch('/signup', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values),
-            // note to self: did not include replacer or space params for .stringify()
-        })
-            .then((r) => r.json())
-            .then((newUser) => {
-                console.log(`Signed up ${newUser.username}!`)
-                login(values)
-            })
-    }
     
     const formSchema = yup.object().shape({
         // improvement: username and email don't show error msg until submit

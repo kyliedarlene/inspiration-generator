@@ -25,8 +25,24 @@ function UserProvider({ children }) {
         })
     }
 
+    function signup(values) {
+        fetch('/signup', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+            // note to self: did not include replacer or space params for .stringify()
+        })
+            .then((r) => r.json())
+            .then((newUser) => {
+                console.log(`Signed up ${newUser.username}!`)
+                login(values)
+            })
+    }
+
     return (
-        <UserContext.Provider value={{ user, setUser, login }}>
+        <UserContext.Provider value={{ user, setUser, login, signup }}>
             {children}
         </UserContext.Provider>
     )
