@@ -41,8 +41,17 @@ function UserProvider({ children }) {
             })
     }
 
+    function logout() {
+        fetch('/logout', {
+            method: 'DELETE'
+        });
+        console.log('logged out')
+        setUser({})
+        // maybe: set to NULL instead
+    }
+
     return (
-        <UserContext.Provider value={{ user, setUser, login, signup }}>
+        <UserContext.Provider value={{ user, login, signup, logout }}>
             {children}
         </UserContext.Provider>
     )
