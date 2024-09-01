@@ -1,9 +1,12 @@
+
+import { useNavigate} from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password'
 YupPassword(yup)
 
 function Signup() {
+    const navigate = useNavigate();
 
     function login(values) {
         fetch('/login', {
@@ -14,7 +17,12 @@ function Signup() {
             body: JSON.stringify(values)
         })
         .then((r) => r.json())
-        .then((user) => console.log(`Logged in ${user.username}!`))
+        .then((user) => {
+            console.log(`Logged in ${user.username}!`)
+            navigate('/')
+            // think through how redirect will work with saved char in state
+                // maybe auto redirect should be in onSubmit, or the right page submitted as param
+        })
     }
 
     function signup(values) {
