@@ -2,15 +2,19 @@ import { Outlet } from "react-router-dom";
 
 import Header from "./Header";
 
-import { UserProvider } from "../context/user";
-import { useEffect } from "react";
+import { UserContext } from "../context/user";
+import { useEffect, useContext } from "react";
 
 function App() {
+  const {user, checkSession} = useContext(UserContext)
+
+  useEffect(() => checkSession(), [])
+
   return (
-    <UserProvider >
+    <div>
       <Header />
       <Outlet />
-    </UserProvider>
+    </div>
   )
 }
 
