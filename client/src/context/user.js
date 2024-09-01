@@ -1,12 +1,15 @@
 import { createContext, useState } from 'react';
 
-const UserContext = createContext("bowie");
+const UserContext = createContext({
+    user: "bowie",
+    setUser: () => console.log("bowiegirlbowiegirl")
+});
 
 function UserProvider({ children }) {
-    // const [user, setUser] = useState({user: null})
+    const [user, setUser] = useState("indy")
 
     return (
-        <UserContext.Provider value={"beck"}>
+        <UserContext.Provider value={{ user, setUser }}>
             {children}
         </UserContext.Provider>
     )

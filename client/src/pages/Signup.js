@@ -9,8 +9,8 @@ YupPassword(yup)
 
 function Signup() {
     const navigate = useNavigate();
-    // const {user, setUser} = useContext(UserContext);
-    const user = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
+    // const user = useContext(UserContext);
 
 
     function login(values) {
@@ -62,7 +62,7 @@ function Signup() {
         },
         validationSchema: formSchema,
         // onSubmit: (values) => signup(values)
-        // onSubmit: () => setUser()
+        onSubmit: () => setUser()
     })
 
       return (
