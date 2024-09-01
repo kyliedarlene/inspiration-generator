@@ -16,6 +16,7 @@ function UserProvider({ children }) {
         .then((r) => r.json())
         .then((newUser) => {
             console.log(`Logged in ${newUser.username}!`)
+            // add: handling for failed login
             setUser(newUser)
             // navigate('/')
             // think through how redirect will work with saved char in state

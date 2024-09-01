@@ -12,7 +12,6 @@ function Signup() {
     const {user, setUser, login} = useContext(UserContext);
 
     console.log(user)
-
     
     function signup(values) {
         fetch('/signup', {
