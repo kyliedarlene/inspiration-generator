@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import RandomCharacter from "./pages/RandomCharacter";
+import Saved from "./pages/Saved";
 import ErrorPage from "./pages/ErrorPage";
 
 const routes = [
@@ -13,19 +14,23 @@ const routes = [
         children: [
             {
                 path: '/',
-                element: <Home />,
+                element: <Home />
             },
             {
                 path: '/login',
-                element: <Login />,
+                element: <Login />
             },
             {
                 path: '/signup',
-                element: <Signup />,
+                element: <Signup />
             },
             {
                 path: '/random-character',
-                element: <RandomCharacter />,
+                element: <RandomCharacter />
+            },
+            {
+                path: '/saved',
+                element: <Saved />
             }
         ]
     }

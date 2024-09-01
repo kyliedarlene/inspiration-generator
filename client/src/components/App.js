@@ -6,7 +6,7 @@ import Header from "./Header";
 import { UserContext } from "../context/user";
 
 function App() {
-  const {user, checkSession} = useContext(UserContext)
+  const {checkSession} = useContext(UserContext)
 
   useEffect(() => checkSession(), [])
 
