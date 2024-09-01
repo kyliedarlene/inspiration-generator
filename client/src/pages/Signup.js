@@ -1,7 +1,7 @@
 import { UserContext } from "../context/user";
 
 import React, { useContext, useEffect } from "react";
-import { useNavigate} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password'
@@ -68,7 +68,6 @@ function Signup() {
       return (
         <div>
           <h1>Signup</h1>
-          <h2>User: {user ? user.username : "none" } </h2>
           <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
 
             <label htmlFor="username">Username</label>
@@ -103,6 +102,7 @@ function Signup() {
             
             <button type="submit">Submit</button>
           </form>
+          <p>Already have an account? <Link to='/login'>Log in</Link></p>
         </div>
       );
 
