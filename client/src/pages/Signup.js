@@ -1,7 +1,7 @@
 import { UserContext } from "../context/user";
 
-import React, { useContext } from "react";
-import { Navigate, useNavigate} from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useNavigate} from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password'
@@ -10,8 +10,8 @@ YupPassword(yup)
 function Signup() {
     const navigate = useNavigate();
     const {user, setUser} = useContext(UserContext);
-    // const user = useContext(UserContext);
 
+    console.log(user)
 
     function login(values) {
         fetch('/login', {
@@ -22,12 +22,13 @@ function Signup() {
             body: JSON.stringify(values)
         })
         .then((r) => r.json())
-        .then((user) => {
-            console.log(`Logged in ${user.username}!`)
-            navigate('/')
+        .then((newUser) => {
+            console.log(`Logged in ${newUser.username}!`)
+            setUser(newUser)
+            // navigate('/')
             // think through how redirect will work with saved char in state
                 // maybe auto redirect should be in onSubmit, or the right page submitted as param
-            // add user in context ? 
+                // navigate can't happen until user is updated in state
         })
     }
 
@@ -41,8 +42,8 @@ function Signup() {
             // note to self: did not include replacer or space params for .stringify()
         })
             .then((r) => r.json())
-            .then((user) => {
-                console.log(`Signed up ${user.username}!`)
+            .then((newUser) => {
+                console.log(`Signed up ${newUser.username}!`)
                 login(values)
             })
     }
@@ -61,14 +62,13 @@ function Signup() {
             password: "",
         },
         validationSchema: formSchema,
-        // onSubmit: (values) => signup(values)
-        onSubmit: () => setUser()
+        onSubmit: (values) => signup(values)
     })
 
       return (
         <div>
           <h1>Signup</h1>
-          <h2>Context: {user} </h2>
+          <h2>User: {user ? user.username : "none" } </h2>
           <form onSubmit={formik.handleSubmit} style={{ margin: "30px" }}>
 
             <label htmlFor="username">Username</label>
