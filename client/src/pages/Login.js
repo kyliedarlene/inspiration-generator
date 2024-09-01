@@ -1,6 +1,6 @@
 import { UserContext } from "../context/user";
 
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -9,7 +9,7 @@ YupPassword(yup)
 
 function Login() {
     const navigate = useNavigate();
-    const {user, setUser, login} = useContext(UserContext);
+    const {user, login} = useContext(UserContext);
 
     console.log(user)
     
