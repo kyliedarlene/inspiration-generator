@@ -1,7 +1,7 @@
 import { UserContext } from "../context/user";
 
 import React, { useContext, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password'
@@ -9,29 +9,11 @@ YupPassword(yup)
 
 function Signup() {
     const navigate = useNavigate();
-    const {user, setUser} = useContext(UserContext);
+    const {user, setUser, login} = useContext(UserContext);
 
     console.log(user)
 
-    function login(values) {
-        fetch('/login', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values)
-        })
-        .then((r) => r.json())
-        .then((newUser) => {
-            console.log(`Logged in ${newUser.username}!`)
-            setUser(newUser)
-            // navigate('/')
-            // think through how redirect will work with saved char in state
-                // maybe auto redirect should be in onSubmit, or the right page submitted as param
-                // navigate can't happen until user is updated in state
-        })
-    }
-
+    
     function signup(values) {
         fetch('/signup', {
             method: 'POST',
