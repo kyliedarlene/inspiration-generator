@@ -52,14 +52,16 @@ function UserProvider({ children }) {
     }
 
     function checkSession() {
-        fetch('/check_session').then((r) => {
-            if (r.ok) {
-                r.json().then((currentUser) => {
-                    console.log(currentUser)
-                    setUser(currentUser)
-                })
-            }
-        })
+        fetch('/check_session')
+            .then((r) => {
+                if (r.ok) {
+                    r.json()
+                        .then((currentUser) => {
+                            console.log(currentUser)
+                            setUser(currentUser)
+                        })
+                    }
+            })
     }
 
     return (
