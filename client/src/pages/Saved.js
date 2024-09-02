@@ -10,7 +10,7 @@ function Saved() {
 
     useEffect(() => {
         if(!user) {
-            navigate('/login')
+            navigate('/login') // possibly find a way to pass this a prop if Login takes a onLogin()
         }
     }, [])
     // const [savedChars, setSavedChars] = useState([])
