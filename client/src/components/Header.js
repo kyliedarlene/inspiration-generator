@@ -1,21 +1,34 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useContext } from "react";
 
 import { UserContext } from "../context/user";
 
 function Header() {
     const { user, logout } = useContext(UserContext)
+    const location = useLocation();
+    const navigate = useNavigate();
     // learn: why does this syntax work? deconstruction, right?
+
+    console.log(location)
 
     return (
         <>
             <header>
                 <Link to='/'>Inspiration Generator</Link>
-                {user ?
-                    <Link to={'/saved'}><button>View Saved Characters</button></Link>
-                    : null
+                {user ? 
+                    <>
+                        {location.pathname === '/saved' ? 
+                            <Link to={'/random-character'}><button>Roll more characters!</button></Link> 
+                            : 
+                            <Link to={'/saved'}><button>View Saved Characters</button></Link> 
+                        }
+                        <button onClick={() => logout()} >Log out</button> 
+                    </>
+                    : 
+                    <>
+                        <button onClick={() => navigate('/login')} >Log in</button>
+                    </> 
                 }
-                <button onClick={() => logout()} >Log out</button>
             </header>
         </>
     )
