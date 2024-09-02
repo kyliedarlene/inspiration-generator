@@ -4,6 +4,7 @@ const UserContext = createContext(null);
 
 function UserProvider({ children }) {
     const [user, setUser] = useState(null)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     function login(values) {
         fetch('/login', {
@@ -19,6 +20,7 @@ function UserProvider({ children }) {
             // add: handling for failed login
             setUser(newUser)
             // navigate('/')
+            setIsLoggedIn(true)
             // think through how redirect will work with saved char in state
                 // maybe auto redirect should be in onSubmit, or the right page submitted as param
                 // navigate can't happen until user is updated in state
@@ -49,6 +51,7 @@ function UserProvider({ children }) {
         console.log('logged out')
         setUser(null)
         // maybe: set to NULL instead
+        setIsLoggedIn(false)
     }
 
     function checkSession() {
@@ -59,6 +62,7 @@ function UserProvider({ children }) {
                         .then((currentUser) => {
                             console.log(currentUser)
                             setUser(currentUser)
+                            setIsLoggedIn(true)
                             // once user is set, set characters
                         })
                     }
@@ -70,7 +74,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value={{ user, login, signup, logout, checkSession }}>
+        <UserContext.Provider value={{ user, isLoggedIn, login, signup, logout, checkSession }}>
             {children}
         </UserContext.Provider>
     )
