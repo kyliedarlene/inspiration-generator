@@ -3,12 +3,10 @@ import { useState, useEffect } from "react";
 import CharacterCard from "../components/CharacterCard";
 
 function RandomCharacter() {
-    const [raceName, setRaceName] = useState("");
-    const [clsName, setClsName] = useState("");
-    const [archName, setArchName] = useState("");
-    const [archDesc, setArchDesc] = useState("");
-    const [bkdName, setBkdName] = useState("");
-    const [bkdDesc, setBkdDesc] = useState("");
+    const [race, setRace] = useState({name: ""})
+    const [cls, setCls] = useState({name: ""})
+    const [arch, setArch] = useState({name: "", desc: ""})
+    const [bkd, setBkd] = useState({name: "", desc: ""})
 
 
     useEffect(() => {
@@ -25,7 +23,7 @@ function RandomCharacter() {
             .then((data) => {
                 const x = randomIndex(data.results)
                 const name = data.results[x].name
-                setRaceName(name)
+                setRace({name: name})
         })
     }
 
@@ -35,14 +33,16 @@ function RandomCharacter() {
             .then((data) => {
                 // class
                 const x = randomIndex(data.results)
-                const className = data.results[x].name
-                setClsName(className)
+                const name = data.results[x].name
+                setCls({name: name})
                 // archetype
                 //// make archetype separate function
                 const y = randomIndex(data.results[x].archetypes);
                 const archetype = data.results[x].archetypes[y];
-                setArchName(archetype.name)
-                setArchDesc(archetype.desc.split('##')[0].split('**')[0])
+                setArch({
+                    name: archetype.name,
+                    desc: archetype.desc.split('##')[0].split('**')[0]
+                })
                 }
         )
     }
@@ -54,8 +54,7 @@ function RandomCharacter() {
                 const x = randomIndex(data.results)
                 const name = data.results[x].name
                 const desc = data.results[x].desc.split('**')[0]
-                setBkdName(name)
-                setBkdDesc(desc)
+                setBkd({name: name, desc: desc})
         })
     }
 
@@ -66,16 +65,14 @@ function RandomCharacter() {
     }
 
     const character = {
-        race_name: raceName,
-        cls_name: clsName,
-        arch_name: archName,
-        arch_desc: archDesc,
-        bkd_name: bkdName,
-        bkd_desc: bkdDesc,
+        race_name: race.name,
+        cls_name: cls.name,
+        arch_name: arch.name,
+        arch_desc: arch.desc,
+        bkd_name: bkd.name,
+        bkd_desc: bkd.desc,
     }
-    
-    console.log(character)
-    
+        
     return (
         <>
             <h2>Random Character Page</h2>
