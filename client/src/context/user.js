@@ -1,9 +1,9 @@
 import { createContext, useState } from 'react';
 
-const UserContext = createContext();
+const UserContext = createContext(null);
 
 function UserProvider({ children }) {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(null)
 
     function login(values) {
         fetch('/login', {
@@ -59,6 +59,7 @@ function UserProvider({ children }) {
                         .then((currentUser) => {
                             console.log(currentUser)
                             setUser(currentUser)
+                            // once user is set, set characters
                         })
                     }
             })
