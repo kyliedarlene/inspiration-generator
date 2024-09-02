@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { UserContext } from "../context/user";
 import CharacterCard from "../components/CharacterCard";
 
@@ -32,6 +32,7 @@ function Saved() {
     return(
         <>
             <h1>Saved Characters</h1>
+            <Link to={'/random-character'}><button>Roll more characters!</button></Link>
             {characters ? 
                 characters.map((char) => (
                         <CharacterCard key={char.id} character={char} />
