@@ -62,6 +62,10 @@ function UserProvider({ children }) {
                             // once user is set, set characters
                         })
                     }
+                else {
+                    r.json()
+                        .then((errors) => console.log(errors))
+                }
             })
     }
 
