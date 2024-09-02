@@ -1,14 +1,13 @@
 import { UserContext } from "../context/user";
 
 import React, { useContext } from "react";
-import { Navigate, useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password'
 YupPassword(yup)
 
 function Login() {
-    const navigate = useNavigate();
     const {user, login} = useContext(UserContext);
 
     console.log(user)

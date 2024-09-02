@@ -1,7 +1,4 @@
-import { 
-    useState, 
-    useEffect 
-} from "react";
+import { useState, useEffect } from "react";
 
 import CharacterCard from "../components/CharacterCard";
 
@@ -9,6 +6,10 @@ function RandomCharacter() {
     const [race, setRace] = useState({});
     const [charClass, setCharClass] = useState({});
     const [background, setBackground] = useState({});
+
+    useEffect(() => {
+        generateCharacter();
+    }, []);
     
     function randomIndex(array) {
         return Math.floor(Math.random() * array.length);
@@ -70,10 +71,6 @@ function RandomCharacter() {
         setRandomClass();
         setRandomBackground();
     }
-
-    useEffect(() => {
-        generateCharacter();
-    }, []);
     
     return (
         <>
