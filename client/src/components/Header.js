@@ -9,7 +9,7 @@ function Header() {
     const navigate = useNavigate();
     // learn: why does this syntax work? deconstruction, right?
 
-    console.log(location)
+    // improvement: something more legible than a nested ternary
 
     return (
         <>
