@@ -47,7 +47,7 @@ function UserProvider({ children }) {
             method: 'DELETE'
         });
         console.log('logged out')
-        setUser({})
+        setUser(null)
         // maybe: set to NULL instead
     }
 
