@@ -3,9 +3,16 @@ import { useState, useEffect } from "react";
 import CharacterCard from "../components/CharacterCard";
 
 function RandomCharacter() {
-    const [race, setRace] = useState({});
-    const [charClass, setCharClass] = useState({});
-    const [background, setBackground] = useState({});
+    // const [race, setRace] = useState({});
+    // const [charClass, setCharClass] = useState({});
+    // const [background, setBackground] = useState({});
+    const [raceName, setRaceName] = useState("");
+    const [clsName, setClsName] = useState("");
+    const [archName, setArchName] = useState("");
+    const [archDesc, setArchDesc] = useState("");
+    const [bkdName, setBkdName] = useState("");
+    const [bkdDesc, setBkdDesc] = useState("");
+
 
     useEffect(() => {
         generateCharacter();
@@ -15,16 +22,26 @@ function RandomCharacter() {
         return Math.floor(Math.random() * array.length);
     }
 
+    // function setRandomRace() {
+    //     fetch(`https://api.open5e.com/races`)
+    //         .then((r) => r.json())
+    //         .then((data) => {
+    //             const x = randomIndex(data.results)
+    //             const name = data.results[x].name
+    //             const newRace = {
+    //                 name: name
+    //             }
+    //             setRace(newRace)
+    //     })
+    // }
+
     function setRandomRace() {
         fetch(`https://api.open5e.com/races`)
             .then((r) => r.json())
             .then((data) => {
                 const x = randomIndex(data.results)
                 const name = data.results[x].name
-                const newRace = {
-                    name: name
-                }
-                setRace(newRace)
+                setRaceName(name)
         })
     }
 
@@ -35,21 +52,31 @@ function RandomCharacter() {
                 // class
                 const x = randomIndex(data.results)
                 const className = data.results[x].name
+                setClsName(className)
                 // archetype
                 //// make archetype separate function
                 const y = randomIndex(data.results[x].archetypes);
                 const archetype = data.results[x].archetypes[y];
-                const newCharClass = {
-                    name: className,
-                    archetype: {
-                        name: archetype.name,
-                        //// swap out double split() for regexp as separator, make separate function for trimming sentences?
-                        desc: archetype.desc.split('##')[0].split('**')[0]
-                    }
+                setArchName(archetype.name)
+                setArchDesc(archetype.desc.split('##')[0].split('**')[0])
                 }
-                setCharClass(newCharClass)
-        })
+        )
     }
+
+    // function setRandomBackground() {
+    //     fetch(`https://api.open5e.com/backgrounds`)
+    //         .then((r) => r.json())
+    //         .then((data) => {
+    //             const x = randomIndex(data.results)
+    //             const name = data.results[x].name
+    //             const desc = data.results[x].desc.split('**')[0]
+    //             const newBackground = {
+    //                 name: name,
+    //                 desc: desc, 
+    //             }
+    //             setBackground(newBackground)
+    //     })
+    // }
 
     function setRandomBackground() {
         fetch(`https://api.open5e.com/backgrounds`)
@@ -58,11 +85,8 @@ function RandomCharacter() {
                 const x = randomIndex(data.results)
                 const name = data.results[x].name
                 const desc = data.results[x].desc.split('**')[0]
-                const newBackground = {
-                    name: name,
-                    desc: desc, 
-                }
-                setBackground(newBackground)
+                setBkdName(name)
+                setBkdDesc(desc)
         })
     }
 
@@ -71,15 +95,26 @@ function RandomCharacter() {
         setRandomClass();
         setRandomBackground();
     }
+
+    const character = {
+        race_name: raceName,
+        cls_name: clsName,
+        arch_name: archName,
+        arch_desc: archDesc,
+        bkd_name: bkdName,
+        bkd_desc: bkdDesc,
+    }
+    
+    console.log(character)
     
     return (
         <>
             <h2>Random Character Page</h2>
-            <CharacterCard character={{
+            {/* <CharacterCard character={{
                 race: race,
                 charClass: charClass,
                 background: background
-            }} />
+            }} /> */}
             <button onClick={generateCharacter} >New Character</button>
         </>
     )
