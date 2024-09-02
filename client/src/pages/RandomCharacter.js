@@ -4,9 +4,9 @@ import CharacterCard from "../components/CharacterCard";
 
 function RandomCharacter() {
     const [race, setRace] = useState({name: ""})
-    const [cls, setCls] = useState({name: ""})
-    const [arch, setArch] = useState({name: "", desc: ""})
-    const [bkd, setBkd] = useState({name: "", desc: ""})
+    const [cls, setCls] = useState({name: "", slug: ""})
+    const [archetype, setArchetype] = useState({name: "", desc: ""})
+    const [background, setBackground] = useState({name: "", desc: ""})
 
 
     useEffect(() => {
@@ -24,20 +24,20 @@ function RandomCharacter() {
                 const x = randomIndex(data.results)
                 const name = data.results[x].name
                 setRace({name: name})
-        })
+            }
+        )
     }
 
     function setRandomClass() {
         fetch(`https://api.open5e.com/classes`)
             .then((r) => r.json())
             .then((data) => {
-                // class
                 const x = randomIndex(data.results)
-                const newCls = data.results[x]
-                setCls({name: newCls.name})
-                // archetype
-                setRandomArchetype(newCls.slug)
-                }
+                const name = data.results[x].name
+                const slug = data.results[x].slug
+                setCls({name: name, slug: slug})
+                setRandomArchetype(slug)
+            }
         )
     }
 
@@ -49,7 +49,7 @@ function RandomCharacter() {
                 const name = data.archetypes[x].name
                 const desc = data.archetypes[x].desc.split('**')[0].split('##')[0]
                 // improvement: simplify split with regex ?
-                setArch({name: name, desc: desc})
+                setArchetype({name: name, desc: desc})
             })
     }
 
@@ -60,7 +60,7 @@ function RandomCharacter() {
                 const x = randomIndex(data.results)
                 const name = data.results[x].name
                 const desc = data.results[x].desc.split('**')[0]
-                setBkd({name: name, desc: desc})
+                setBackground({name: name, desc: desc})
         })
     }
 
@@ -73,10 +73,10 @@ function RandomCharacter() {
     const character = {
         race_name: race.name,
         cls_name: cls.name,
-        arch_name: arch.name,
-        arch_desc: arch.desc,
-        bkd_name: bkd.name,
-        bkd_desc: bkd.desc,
+        arch_name: archetype.name,
+        arch_desc: archetype.desc,
+        bkd_name: background.name,
+        bkd_desc: background.desc,
     }
         
     return (
