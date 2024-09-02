@@ -1,9 +1,18 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from "../context/user";
 import CharacterCard from "../components/CharacterCard";
 
 function Saved() {
     const {user} = useContext(UserContext)
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!user) {
+            navigate('/login')
+        }
+    }, [])
     // const [savedChars, setSavedChars] = useState([])
 
     // useEffect(() => {
