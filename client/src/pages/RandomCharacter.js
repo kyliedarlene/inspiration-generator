@@ -12,7 +12,7 @@ function RandomCharacter() {
     useEffect(() => {
         generateCharacter();
     }, []);
-    
+
     function randomIndex(array) {
         return Math.floor(Math.random() * array.length);
     }
@@ -33,18 +33,24 @@ function RandomCharacter() {
             .then((data) => {
                 // class
                 const x = randomIndex(data.results)
-                const name = data.results[x].name
-                setCls({name: name})
+                const newCls = data.results[x]
+                setCls({name: newCls.name})
                 // archetype
-                //// make archetype separate function
-                const y = randomIndex(data.results[x].archetypes);
-                const archetype = data.results[x].archetypes[y];
-                setArch({
-                    name: archetype.name,
-                    desc: archetype.desc.split('##')[0].split('**')[0]
-                })
+                setRandomArchetype(newCls.slug)
                 }
         )
+    }
+
+    function setRandomArchetype(classSlug) {
+        fetch(`https://api.open5e.com/classes/${classSlug}`)
+            .then((r) => r.json())
+            .then((data) => {
+                const x = randomIndex(data.archetypes)
+                const name = data.archetypes[x].name
+                const desc = data.archetypes[x].desc.split('**')[0].split('##')[0]
+                // improvement: simplify split with regex ?
+                setArch({name: name, desc: desc})
+            })
     }
 
     function setRandomBackground() {
