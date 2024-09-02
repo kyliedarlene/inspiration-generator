@@ -115,6 +115,7 @@ function RandomCharacter() {
                 charClass: charClass,
                 background: background
             }} /> */}
+            <CharacterCard character={character} />
             <button onClick={generateCharacter} >New Character</button>
         </>
     )
