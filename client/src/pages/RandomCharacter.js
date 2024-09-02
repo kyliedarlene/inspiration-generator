@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import CharacterCard from "../components/CharacterCard";
+import SaveCharacter from "../components/SaveCharacter";
 
 function RandomCharacter() {
     const [race, setRace] = useState({name: ""})
@@ -8,13 +9,21 @@ function RandomCharacter() {
     const [archetype, setArchetype] = useState({name: "", desc: ""})
     const [background, setBackground] = useState({name: "", desc: ""})
 
+    useEffect(() => generateCharacter(), []);
 
-    useEffect(() => {
-        generateCharacter();
-    }, []);
+    const character = {
+        race_name: race.name,
+        cls_name: cls.name,
+        arch_name: archetype.name,
+        arch_desc: archetype.desc,
+        bkd_name: background.name,
+        bkd_desc: background.desc,
+    }
 
-    function randomIndex(array) {
-        return Math.floor(Math.random() * array.length);
+    function generateCharacter() {
+        setRandomRace();
+        setRandomClass();
+        setRandomBackground();
     }
 
     function setRandomRace() {
@@ -64,24 +73,14 @@ function RandomCharacter() {
         })
     }
 
-    function generateCharacter() {
-        setRandomRace();
-        setRandomClass();
-        setRandomBackground();
-    }
-
-    const character = {
-        race_name: race.name,
-        cls_name: cls.name,
-        arch_name: archetype.name,
-        arch_desc: archetype.desc,
-        bkd_name: background.name,
-        bkd_desc: background.desc,
+    function randomIndex(array) {
+        return Math.floor(Math.random() * array.length);
     }
         
     return (
         <>
             <h2>Random Character Page</h2>
+            <SaveCharacter character={character} />
             <CharacterCard character={character} />
             <button onClick={generateCharacter} >New Character</button>
         </>
