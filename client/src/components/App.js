@@ -12,13 +12,17 @@ function App() {
 
   useEffect(() => {
     checkSession()
-    if (!isLoggedIn) {
-      navigate('/')
+    if (isLoggedIn) {
+      if((location.pathname === '/login') | (location.pathname === '/signup')) {
+        navigate('/')
+      }
+    } 
+    else {
+      if(location.pathname === '/saved') {
+        navigate('/login')
+      }
     }
   }, [isLoggedIn])
-
-  console.log(location)
-  console.log(isLoggedIn)
 
   return (
     <div>

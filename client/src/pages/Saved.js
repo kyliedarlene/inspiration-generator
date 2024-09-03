@@ -6,13 +6,13 @@ import CharacterCard from "../components/CharacterCard";
 function Saved() {
     const {user} = useContext(UserContext)
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    useEffect(() => {
-        if(!user) {
-            navigate('/login') // possibly find a way to pass this a prop if Login takes a onLogin()
-        }
-    }, [])
+    // useEffect(() => {
+    //     if(!user) {
+    //         navigate('/login') // possibly find a way to pass this a prop if Login takes a onLogin()
+    //     }
+    // }, [])
     // const [savedChars, setSavedChars] = useState([])
 
     // useEffect(() => {
