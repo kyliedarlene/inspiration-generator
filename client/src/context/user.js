@@ -53,27 +53,26 @@ function UserProvider({ children }) {
         setIsLoggedIn(false)
     }
 
-    function checkSession() {
-        fetch('/check_session')
-            .then((r) => {
-                if (r.ok) {
-                    r.json()
-                        .then((currentUser) => {
-                            console.log(currentUser)
-                            setUser(currentUser)
-                            setIsLoggedIn(true)
-                            return currentUser
-                        })
-                    }
-                else {
-                    r.json()
-                        .then((errors) => console.log(errors))
-                }
-            })
-    }
+    // function checkSession() {
+    //     fetch('/check_session')
+    //         .then((r) => {
+    //             if (r.ok) {
+    //                 r.json()
+    //                     .then((currentUser) => {
+    //                         console.log(currentUser)
+    //                         setUser(currentUser)
+    //                         return currentUser
+    //                     })
+    //                 }
+    //             else {
+    //                 r.json()
+    //                     .then((errors) => console.log(errors))
+    //             }
+    //         })
+    // }
 
     return (
-        <UserContext.Provider value={{ user, setUser, login, signup, logout, checkSession }}>
+        <UserContext.Provider value={{ user, setUser, login, signup, logout }}>
             {children}
         </UserContext.Provider>
     )

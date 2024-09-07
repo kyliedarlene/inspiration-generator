@@ -1,8 +1,7 @@
 import { useEffect, useContext, useState } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import Header from "./Header";
-
 import { UserContext } from "../context/user";
 
 function App() {
@@ -19,13 +18,13 @@ function App() {
         })
       }
       else {
-        r.json().then((errors) => setIsLoading(false))
+        r.json().then(() => setIsLoading(false))
       }
     })
   }, [])
 
   if (isLoading) {
-    return <div>Loading...</div>; // Show loading state or spinner
+    return <div>Loading...</div>
   }
 
   return (

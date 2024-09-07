@@ -5,21 +5,13 @@ import Signup from "./pages/Signup";
 import RandomCharacter from "./pages/RandomCharacter";
 import Saved from "./pages/Saved";
 import ErrorPage from "./pages/ErrorPage";
-
-import { Navigate, NavigationType, Outlet } from "react-router-dom";
-import { useContext, useEffect } from "react";
 import { UserContext } from "./context/user";
+
+import { useContext } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
 function ProtectedRoute() {
     const {user} = useContext(UserContext);
-
-    // useEffect(() => {
-    //     fetch('/check_session').then((r) => {
-    //         if(!r.ok) {
-    //             return <Navigate to='/login' />
-    //         }
-    //     })
-    // }, [user])
 
     if(!user) {
         return <Navigate to='/login' />
