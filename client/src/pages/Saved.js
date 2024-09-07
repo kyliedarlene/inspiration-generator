@@ -7,11 +7,14 @@ function Saved() {
     const {user} = useContext(UserContext)
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/login')
-        }
-    }, [user])
+    //// doesn't work because user checkSession() hasn't finished updating user from app;
+    //// user is null, so /saved redirects even if logged in
+
+    // useEffect(() => {
+    //     if (!user) {
+    //         navigate('/login')
+    //     }
+    // }, [user])
 
     // useEffect(() => {
     //     if(!user) {

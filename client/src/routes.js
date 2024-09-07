@@ -6,6 +6,16 @@ import RandomCharacter from "./pages/RandomCharacter";
 import Saved from "./pages/Saved";
 import ErrorPage from "./pages/ErrorPage";
 
+import { Navigate, Outlet } from "react-router-dom";
+
+function ProtectedRoute() {
+    const loggedIn = true
+    if (!loggedIn) {
+        return <Navigate to='/login' />
+    }
+    return <Outlet />
+}
+
 const routes = [
     {
         path: '/',
@@ -14,25 +24,30 @@ const routes = [
         children: [
             {
                 path: '/',
-                element: <Home />
+                element: <Home />,
             },
             {
                 path: '/login',
-                element: <Login />
+                element: <Login />,
             },
             {
                 path: '/signup',
-                element: <Signup />
+                element: <Signup />,
             },
             {
                 path: '/random-character',
-                element: <RandomCharacter />
+                element: <RandomCharacter />,
             },
             {
-                path: '/saved',
-                element: <Saved />
-            }
-        ]
+                element: <ProtectedRoute />,
+                children: [
+                    {
+                        path: '/saved',
+                        element: <Saved />
+                    }
+                ]
+            },
+        ],
     }
 ];
 
