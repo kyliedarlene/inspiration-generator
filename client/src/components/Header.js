@@ -7,7 +7,6 @@ function Header() {
     const { user, logout } = useContext(UserContext)
     const location = useLocation();
     const navigate = useNavigate();
-    // learn: why does this syntax work? deconstruction, right?
 
     // improvement: something more legible than a nested ternary
 

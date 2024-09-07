@@ -12,16 +12,16 @@ function App() {
 
   useEffect(() => {
     checkSession()
-    if (isLoggedIn) {
-      if((location.pathname === '/login') | (location.pathname === '/signup')) {
-        navigate('/')
-      }
-    } 
-    else {
-      if(location.pathname === '/saved') {
-        navigate('/login')
-      }
-    }
+    // if (isLoggedIn) {
+    //   if((location.pathname === '/login') | (location.pathname === '/signup')) {
+    //     navigate('/')
+    //   }
+    // } 
+    // else {
+    //   if(location.pathname === '/saved') {
+    //     navigate('/login')
+    //   }
+    // }
   }, [isLoggedIn])
 
   return (

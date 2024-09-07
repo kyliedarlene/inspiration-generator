@@ -50,7 +50,6 @@ function UserProvider({ children }) {
         });
         console.log('logged out')
         setUser(null)
-        // maybe: set to NULL instead
         setIsLoggedIn(false)
     }
 
