@@ -5,8 +5,13 @@ import CharacterCard from "../components/CharacterCard";
 
 function Saved() {
     const {user} = useContext(UserContext)
+    const navigate = useNavigate();
 
-    // const navigate = useNavigate();
+    useEffect(() => {
+        if (!user) {
+            navigate('/login')
+        }
+    }, [user])
 
     // useEffect(() => {
     //     if(!user) {
