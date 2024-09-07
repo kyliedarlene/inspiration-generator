@@ -62,7 +62,7 @@ function UserProvider({ children }) {
                             console.log(currentUser)
                             setUser(currentUser)
                             setIsLoggedIn(true)
-                            // once user is set, set characters
+                            return currentUser
                         })
                     }
                 else {
@@ -73,7 +73,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value={{ user, isLoggedIn, login, signup, logout, checkSession }}>
+        <UserContext.Provider value={{ user, setUser, login, signup, logout, checkSession }}>
             {children}
         </UserContext.Provider>
     )
