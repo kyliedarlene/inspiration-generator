@@ -4,18 +4,28 @@ import {
     Card,
     CardActions,
     CardContent,
+    CardMedia,
     IconButton,
     Button,
     Typography
 } from '@mui/material'
 
 import SaveCharacter from './SaveCharacter'
+import Artificer from '../assets/class_icons/Artificer.png'
 
 function CharacterCard({ character }) {
 
     const card = (
         <Fragment>
             
+            <CardMedia
+                sx={{ height: 140 }}
+                component="img"
+                image={Artificer}
+                title="class icon"
+                alt="artificer icon"
+            />
+
             <CardContent>
                 
                 <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
@@ -42,8 +52,8 @@ function CharacterCard({ character }) {
     )
 
     return(
-        <Box sx={{ minWidth: 275 }}>
-            <Card variant="outlined">{card}</Card>
+        <Box sx={{ maxWidth: 300 }}>
+            <Card align={'center'} sx={{height: 360}} variant="outlined">{card}</Card>
         </Box>
     )
 
