@@ -11,9 +11,38 @@ import {
 } from '@mui/material'
 
 import SaveCharacter from './SaveCharacter'
+
 import Artificer from '../assets/class_icons/Artificer.png'
+import Barbarian from '../assets/class_icons/Barbarian.png'
+import Bard from '../assets/class_icons/Bard.png'
+import Cleric from '../assets/class_icons/Cleric.png'
+import Druid from '../assets/class_icons/Druid.png'
+import Fighter from '../assets/class_icons/Fighter.png'
+import Monk from '../assets/class_icons/Monk.png'
+import Paladin from '../assets/class_icons/Paladin.png'
+import Ranger from '../assets/class_icons/Ranger.png'
+import Rogue from '../assets/class_icons/Rogue.png'
+import Sorcerer from '../assets/class_icons/Sorcerer.png'
+import Warlock from '../assets/class_icons/Warlock.png'
+import Wizard from '../assets/class_icons/Wizard.png'
 
 function CharacterCard({ character }) {
+
+    const images = {
+        Artificer: Artificer,
+        Barbarian: Barbarian,
+        Bard: Bard,
+        Cleric: Cleric,
+        Druid: Druid,
+        Fighter: Fighter,
+        Monk: Monk,
+        Paladin: Paladin,
+        Ranger: Ranger,
+        Rogue: Rogue,
+        Sorcerer: Sorcerer,
+        Warlock: Warlock,
+        Wizard: Wizard
+    };
 
     const card = (
         <Fragment>
@@ -27,9 +56,9 @@ function CharacterCard({ character }) {
             <CardMedia
                 sx={{ height: 140 }}
                 component="img"
-                image={Artificer}
+                image={images[character.cls_name]}
                 title="class icon"
-                alt="artificer icon"
+                alt="class"
             />
 
             <CardContent>
