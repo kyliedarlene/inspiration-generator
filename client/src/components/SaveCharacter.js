@@ -2,6 +2,9 @@ import { UserContext } from "../context/user";
 
 import { useContext } from "react";
 
+import { IconButton } from '@mui/material'
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+
 function SaveCharacter({ character }) {
     // const {user} = useContext(UserContext);
 
@@ -20,9 +23,9 @@ function SaveCharacter({ character }) {
     }
     
     return(
-        <button onClick={() => handleSaveCharacter()} >
-            Save Character
-        </button>
+        <IconButton onClick={handleSaveCharacter} aria-label="save-character">
+            <StarBorderIcon fontSize="small" />
+        </IconButton>
     )
 }
 

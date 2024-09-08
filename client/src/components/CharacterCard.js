@@ -8,7 +8,8 @@ import {
     Button,
     Typography
 } from '@mui/material'
-import StarBorderIcon from '@mui/icons-material/StarBorder';
+
+import SaveCharacter from './SaveCharacter'
 
 function CharacterCard({ character }) {
 
@@ -33,9 +34,7 @@ function CharacterCard({ character }) {
 
             <CardActions>
 
-            <IconButton aria-label="delete">
-                <StarBorderIcon />
-            </IconButton>
+                <SaveCharacter character={character} />
 
             </CardActions>
 

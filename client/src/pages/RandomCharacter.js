@@ -80,7 +80,6 @@ function RandomCharacter() {
     return (
         <>
             <h2>Random Character Page</h2>
-            <SaveCharacter character={character} />
             <CharacterCard character={character} />
             <button onClick={generateCharacter} >New Character</button>
         </>
