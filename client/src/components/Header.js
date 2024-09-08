@@ -23,14 +23,7 @@ function Header() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    /////////////
-
-    const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
-  
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-    };
   
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -43,28 +36,16 @@ function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
 
-        {/* auth toggle */}
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={auth}
-              onChange={handleChange}
-              aria-label="login switch"
-            />
-          }
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup>
-
       {/* nav bar */}
       <AppBar position="static">
         <Toolbar>
 
           {/* title */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Inspiration Generator
-          </Typography>
+          <Link to='/'>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                Inspiration Generator
+            </Typography>
+          </Link>
 
           {/* render if logged in */}
           {user && (
@@ -129,28 +110,6 @@ function Header() {
     </Box>
   );
 
-    }
-
-    // return (
-    //     <>
-    //         <header>
-    //             <Link to='/'>Inspiration Generator</Link>
-    //             {user ? 
-    //                 <>
-    //                     {location.pathname === '/saved' ? 
-    //                         <Link to={'/random-character'}><button>Roll more characters!</button></Link> 
-    //                         : 
-    //                         <Link to={'/saved'}><button>View Saved Characters</button></Link> 
-    //                     }
-    //                     <button onClick={() => logout()} >Log out</button> 
-    //                 </>
-    //                 : 
-    //                 <>
-    //                     <button onClick={() => navigate('/login')} >Log in</button>
-    //                 </> 
-    //             }
-    //         </header>
-    //     </>
-    // )
+}
 
 export default Header; 
