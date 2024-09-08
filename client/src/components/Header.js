@@ -1,7 +1,5 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import React, { useContext, useState } from "react";
-
-import { UserContext } from "../context/user";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import {
     AppBar,
@@ -17,7 +15,8 @@ import {
     FormControlLabel
 } from '@mui/material'
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MenuIcon from '@mui/icons-material/Menu';
+
+import { UserContext } from "../context/user";
 
 function Header() {
     const { user, logout } = useContext(UserContext)
@@ -68,7 +67,7 @@ function Header() {
           </Typography>
 
           {/* render if logged in */}
-          {auth && (
+          {user && (
             <div>
                 
                 {/* Button: view saved characters */}
@@ -114,7 +113,7 @@ function Header() {
           )}
 
           {/* render if NOT logged in */}
-          {!auth && (
+          {!user && (
             <div>
 
                 {/* Button: login */}
