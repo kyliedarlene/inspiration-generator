@@ -105,6 +105,19 @@ function Header() {
 
             </div>
           )}
+
+          {/* render if NOT logged in */}
+          {!auth && (
+            <div>
+
+                {/* Button: login */}
+                <Button color="inherit" onClick={() => navigate('/login')} >
+                    Login
+                </Button>
+
+            </div>
+          )}
+
         </Toolbar>
       </AppBar>
     </Box>
