@@ -70,38 +70,45 @@ function Header() {
           {/* render if logged in */}
           {auth && (
             <div>
+                
+                {/* Button: view saved characters */}
+                {location.pathname === '/saved' ? 
+                    <Link to={'/random-character'}><Button color="inherit" >Roll more characters!</Button></Link> 
+                    : 
+                    <Link to={'/saved'}><Button color="inherit" >My characters</Button></Link> 
+                }
 
-              {/* profile icon */}
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+                {/* profile icon */}
+                <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleMenu}
+                    color="inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
 
-              {/* profile dropdown */}
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClick={logout}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Menu>
+                {/* profile dropdown */}
+                <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                    }}
+                    open={Boolean(anchorEl)}
+                    onClick={logout}
+                    onClose={handleClose}
+                >
+                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                </Menu>
 
             </div>
           )}
@@ -124,8 +131,6 @@ function Header() {
   );
 
     }
-
-    // improvement: something more legible than a nested ternary
 
     // return (
     //     <>
