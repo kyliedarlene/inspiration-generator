@@ -18,6 +18,12 @@ function CharacterCard({ character }) {
     const card = (
         <Fragment>
             
+            <CardActions>
+
+                <SaveCharacter character={character} />
+
+            </CardActions>
+
             <CardMedia
                 sx={{ height: 140 }}
                 component="img"
@@ -41,12 +47,6 @@ function CharacterCard({ character }) {
                 </Typography>
 
             </CardContent>
-
-            <CardActions>
-
-                <SaveCharacter character={character} />
-
-            </CardActions>
 
         </Fragment>
     )

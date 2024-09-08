@@ -3,6 +3,10 @@ import { useNavigate, Link } from 'react-router-dom'
 import { UserContext } from "../context/user";
 import CharacterCard from "../components/CharacterCard";
 
+import Grid from '@mui/material/Grid2';
+import Box from '@mui/material/Box';
+
+
 function Saved() {
     const {user} = useContext(UserContext)
     const navigate = useNavigate();
@@ -38,15 +42,18 @@ function Saved() {
     // const characters = user.characters;
 
     return(
-        <>
-            <h1>Saved Characters</h1>
-            {characters ? 
-                characters.map((char) => (
-                        <CharacterCard key={char.id} character={char} />
-                ))
-                : null
-            }
-        </>
+        <Box sx={{ width: '100%' }}>
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                {characters ? 
+                    characters.map((char) => (
+                        <Grid key={char.id} size={4}>
+                            <CharacterCard character={char} />
+                        </Grid>
+                    ))
+                    : null
+                }
+            </Grid>
+        </Box>
     )
 
 }
