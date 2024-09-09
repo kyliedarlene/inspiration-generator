@@ -1,7 +1,7 @@
 import { UserContext } from "../context/user";
 
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import YupPassword from 'yup-password'
@@ -26,6 +26,10 @@ function Login() {
         validationSchema: formSchema,
         onSubmit: (values) => login(values)
     })
+
+    if(user) {
+      return <Navigate to={'/'} />
+    }
 
       return (
         <div>
