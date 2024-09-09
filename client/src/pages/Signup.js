@@ -30,6 +30,10 @@ function Signup() {
         onSubmit: (values) => signup(values)
     })
 
+    if(user) {
+      return <Navigate to={'/'} />
+    }
+
       return (
         <div>
           <h1>Signup</h1>
