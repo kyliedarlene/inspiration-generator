@@ -14,6 +14,7 @@ function RandomCharacter() {
 
     useEffect(() => {
         generateCharacter()
+            .then((char) => setCharacter(char))
     }, [])
 
     console.log(character)
@@ -27,7 +28,7 @@ function RandomCharacter() {
 
         const arch = selectRandomItem(cls.archetypes)
 
-        setCharacter({
+        const newCharacter = ({
             race_name: race.name,
             cls_name: cls.name,
             arch_name: arch.name,
@@ -35,6 +36,8 @@ function RandomCharacter() {
             bkd_name: bkd.name,
             bkd_desc: bkd.desc.split('**')[0],
         })
+
+        return newCharacter;
     }
 
     async function getRandomAttribute(endpoint) {
@@ -42,10 +45,10 @@ function RandomCharacter() {
             // fetch data
             const response = await fetch(`https://api.open5e.com/${endpoint}`);
             const data = await response.json();
-            // select random race
-            const attr = selectRandomItem(data.results)
+            // select random attribute
+            const attribute = selectRandomItem(data.results)
             // return race
-            return attr;
+            return attribute;
         }
         catch (error) {
             console.error(`Error fetching ${endpoint}: `, error)
