@@ -1,10 +1,10 @@
-import { UserContext } from "../context/user";
-import { SavedCharactersContext } from "../context/savedCharacters";
-
 import { useContext } from "react";
 
 import { IconButton } from '@mui/material'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+
+import { UserContext } from "../context/user";
+import { SavedCharactersContext } from "../context/savedCharacters";
 
 function SaveCharacter({ character }) {
     const {user} = useContext(UserContext);
