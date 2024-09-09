@@ -1,3 +1,8 @@
+const restricted = {
+    definite: ["Darakhul", "Alseid", "Derro", "Erina", "Satarre", "Shade"],
+    maybe: ["Dragonborn", "Half-Elf", "Half-Orc", "Human", "Tiefling"]
+}
+
 async function generateCharacter() {
     const [race, cls, bkd] = await Promise.all([
         getRandomAttribute('races'),
