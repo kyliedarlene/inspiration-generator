@@ -3,6 +3,13 @@ import { useState, useEffect } from "react";
 import CharacterCard from "../components/CharacterCard";
 import SaveCharacter from "../components/SaveCharacter";
 
+import {
+    Button,
+    Container,
+} from '@mui/material'
+import { flex } from '@mui/system';
+
+
 function RandomCharacter() {
     const [race, setRace] = useState({name: ""})
     const [cls, setCls] = useState({name: "", slug: ""})
@@ -78,11 +85,16 @@ function RandomCharacter() {
     }
         
     return (
-        <>
-            <h2>Random Character Page</h2>
+        <Container 
+            maxWidth='sm' 
+            sx={{ 
+                justifyContent: 'center', 
+                display: flex
+            }} 
+        >
             <CharacterCard character={character} />
-            <button onClick={generateCharacter} >New Character</button>
-        </>
+            <Button variant={"contained"} onClick={generateCharacter} >New Character</Button>
+        </Container>
     )
 }
 

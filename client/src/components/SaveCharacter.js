@@ -6,9 +6,14 @@ import { IconButton } from '@mui/material'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 function SaveCharacter({ character }) {
-    // const {user} = useContext(UserContext);
+    const {user} = useContext(UserContext);
 
-    character.user_id = 1
+    // temporary handling for logged out    
+    if(!user) {
+        return null
+    }
+
+    character.user_id = user['id']
 
     function handleSaveCharacter() {
         fetch('/characters', {
