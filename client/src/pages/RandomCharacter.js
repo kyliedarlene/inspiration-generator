@@ -13,9 +13,13 @@ function RandomCharacter() {
     const [character, setCharacter] = useState()
 
     useEffect(() => {
-        generateCharacter()
-            .then((char) => setCharacter(char))
-    }, [])
+        if(!character) {
+            generateCharacter()
+                .then((char) => {
+                    setCharacter(char)
+                })
+        }
+    }, [character])
 
     console.log(character)
 
@@ -32,9 +36,9 @@ function RandomCharacter() {
             race_name: race.name,
             cls_name: cls.name,
             arch_name: arch.name,
-            arch_desc: arch.desc.split('**')[0].split('##')[0],
+            arch_desc: arch.desc.split(/(\*\*|##)/)[0],
             bkd_name: bkd.name,
-            bkd_desc: bkd.desc.split('**')[0],
+            bkd_desc: bkd.desc.split(/(\*\*)/)[0],
         })
 
         return newCharacter;
@@ -70,7 +74,7 @@ function RandomCharacter() {
             }} 
         >
             <CharacterCard character={character} />
-            <Button variant={"contained"} >New Character</Button>
+            <Button variant={"contained"} onClick={() => setCharacter()} >New Character</Button>
         </Container>
     )
 }
