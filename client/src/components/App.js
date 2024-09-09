@@ -3,9 +3,11 @@ import { Outlet } from "react-router-dom";
 
 import Header from "./Header";
 import { UserContext } from "../context/user";
+import { SavedCharactersContext } from "../context/savedCharacters";
 
 function App() {
   const {setUser} = useContext(UserContext)
+  const {setSavedCharacters} = useContext(SavedCharactersContext)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -14,6 +16,8 @@ function App() {
         r.json().then((currentUser) => {
           console.log(currentUser)
           setUser(currentUser)
+          setSavedCharacters(currentUser.characters)
+          // console.log(currentUser.characters)
           setIsLoading(false);
         })
       }
