@@ -1,4 +1,5 @@
 import { UserContext } from "../context/user";
+import { SavedCharactersContext } from "../context/savedCharacters";
 
 import { useContext } from "react";
 
@@ -7,6 +8,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 function SaveCharacter({ character }) {
     const {user} = useContext(UserContext);
+    const {savedCharacters, setSavedCharacters} = useContext(SavedCharactersContext)
 
     // temporary handling for logged out    
     if(!user) {
@@ -24,7 +26,10 @@ function SaveCharacter({ character }) {
             body: JSON.stringify(character),
         })
             .then((r) => r.json())
-            .then((data) => console.log(data))
+            .then((newChar) => {
+                console.log(newChar)
+                setSavedCharacters([...savedCharacters, newChar])
+            })
     }
     
     return(
