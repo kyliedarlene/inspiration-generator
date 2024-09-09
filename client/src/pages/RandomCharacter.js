@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 import CharacterCard from "../components/CharacterCard";
-import SaveCharacter from "../components/SaveCharacter";
 
 import {
     Button,
@@ -11,77 +10,52 @@ import { flex } from '@mui/system';
 
 
 function RandomCharacter() {
-    const [race, setRace] = useState({name: ""})
-    const [cls, setCls] = useState({name: "", slug: ""})
-    const [archetype, setArchetype] = useState({name: "", desc: ""})
-    const [background, setBackground] = useState({name: "", desc: ""})
+    const [character, setCharacter] = useState()
 
-    useEffect(() => generateCharacter(), []);
+    useEffect(() => {
+        generateCharacter()
+    }, [])
 
-    const character = {
-        race_name: race.name,
-        cls_name: cls.name,
-        arch_name: archetype.name,
-        arch_desc: archetype.desc,
-        bkd_name: background.name,
-        bkd_desc: background.desc,
-    }
+    console.log(character)
 
-    function generateCharacter() {
-        setRandomRace();
-        setRandomClass();
-        setRandomBackground();
-    }
+    async function generateCharacter() {
+        const [race, cls, bkd] = await Promise.all([
+            getRandomAttribute('races'),
+            getRandomAttribute('classes'),
+            getRandomAttribute('backgrounds')
+        ])
 
-    function setRandomRace() {
-        fetch(`https://api.open5e.com/races`)
-            .then((r) => r.json())
-            .then((data) => {
-                const x = randomIndex(data.results)
-                const name = data.results[x].name
-                setRace({name: name})
-            }
-        )
-    }
+        const arch = selectRandomItem(cls.archetypes)
 
-    function setRandomClass() {
-        fetch(`https://api.open5e.com/classes`)
-            .then((r) => r.json())
-            .then((data) => {
-                const x = randomIndex(data.results)
-                const name = data.results[x].name
-                const slug = data.results[x].slug
-                setCls({name: name, slug: slug})
-                setRandomArchetype(slug)
-            }
-        )
-    }
-
-    function setRandomArchetype(classSlug) {
-        fetch(`https://api.open5e.com/classes/${classSlug}`)
-            .then((r) => r.json())
-            .then((data) => {
-                const x = randomIndex(data.archetypes)
-                const name = data.archetypes[x].name
-                const desc = data.archetypes[x].desc.split('**')[0].split('##')[0]
-                // improvement: simplify split with regex ?
-                setArchetype({name: name, desc: desc})
-            })
-    }
-
-    function setRandomBackground() {
-        fetch(`https://api.open5e.com/backgrounds`)
-            .then((r) => r.json())
-            .then((data) => {
-                const x = randomIndex(data.results)
-                const name = data.results[x].name
-                const desc = data.results[x].desc.split('**')[0]
-                setBackground({name: name, desc: desc})
+        setCharacter({
+            race_name: race.name,
+            cls_name: cls.name,
+            arch_name: arch.name,
+            arch_desc: arch.desc.split('**')[0].split('##')[0],
+            bkd_name: bkd.name,
+            bkd_desc: bkd.desc.split('**')[0],
         })
     }
 
-    function randomIndex(array) {
-        return Math.floor(Math.random() * array.length);
+    async function getRandomAttribute(endpoint) {
+        try {
+            // fetch data
+            const response = await fetch(`https://api.open5e.com/${endpoint}`);
+            const data = await response.json();
+            // select random race
+            const attr = selectRandomItem(data.results)
+            // return race
+            return attr;
+        }
+        catch (error) {
+            console.error(`Error fetching ${endpoint}: `, error)
+            return null
+        }
+    }
+
+    function selectRandomItem(array) {
+        const x = Math.floor(Math.random() * array.length);
+        return array[x]
     }
         
     return (
@@ -93,7 +67,7 @@ function RandomCharacter() {
             }} 
         >
             <CharacterCard character={character} />
-            <Button variant={"contained"} onClick={generateCharacter} >New Character</Button>
+            <Button variant={"contained"} >New Character</Button>
         </Container>
     )
 }

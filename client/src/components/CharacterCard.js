@@ -13,7 +13,7 @@ import classIcons from '../assets/class_icons/classIcons'
 
 function CharacterCard({ character }) {
 
-    console.log(character)
+    // console.log(character)
 
     let card = (
         <Fragment>
