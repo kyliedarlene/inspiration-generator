@@ -93,8 +93,8 @@ function Header() {
             </div>
           )}
 
-          {/* render if NOT logged in */}
-          {!user && (
+          {/* render if NOT logged in and route !== /login or /signup */}
+          {!user && location.pathname !== '/login' && location.pathname !== '/signup' && (
             <div>
 
                 {/* Button: login */}
