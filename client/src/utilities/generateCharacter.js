@@ -3,7 +3,10 @@ const noSubraceRaces = ["Dragonborn", "Half-Elf", "Half-Orc", "Human", "Tiefling
 
 async function generateCharacter() {
     const [race, cls, bkd] = await Promise.all([
-        getRandomAttribute('races', 'name', restrictedRaces),
+        getRandomAttribute(
+            'races', 
+            (race, r=restrictedRaces) => (r.includes(race['name']))
+            ),
         getRandomAttribute('classes'),
         getRandomAttribute('backgrounds')
     ])
@@ -22,22 +25,15 @@ async function generateCharacter() {
     return character;
 }
 
-async function getRandomAttribute(
-    endpoint, 
-    restrictedValue = null, 
-    restrictedList = []
-    ){
+async function getRandomAttribute(endpoint, isRestricted = (attribute) => (false)){
     try {
-        // fetch data
         const response = await fetch(`https://api.open5e.com/${endpoint}`);
         const data = await response.json();
-        // select random attribute
-        let attribute = selectRandomItem(data.results)
-        // select new attribute if attribute is in restrictedList
-        while (restrictedValue && restrictedList.includes(attribute[restrictedValue])) {
-            attribute = selectRandomItem(data.results);
-        }
-        // return attribute
+        let attribute;
+        do {
+            attribute = selectRandomItem(data.results)
+        } 
+        while (isRestricted(attribute))
         return attribute;
     }
     catch (error) {
