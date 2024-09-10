@@ -1,5 +1,6 @@
 const restrictedRaces = ["Darakhul", "Alseid", "Derro", "Erina", "Satarre", "Shade"]
 const noSubraceRaces = ["Dragonborn", "Half-Elf", "Half-Orc", "Human", "Tiefling"]
+const restrictedArchetypes = ["Underfoot"]
 
 async function generateCharacter() {
     const [race, cls, bkd] = await Promise.all([
@@ -11,7 +12,10 @@ async function generateCharacter() {
         getRandomAttribute('backgrounds')
     ])
 
-    const arch = selectRandomItem(cls.archetypes)
+    let arch; 
+    do {
+        arch = selectRandomItem(cls.archetypes)
+    } while(restrictedArchetypes.includes(arch))
 
     const character = ({
         race_name: race.name,
