@@ -25,6 +25,8 @@ function CharacterCard({ character }) {
         </Fragment>
     )
 
+    // later: 
+    // maybe use chip prop for race and bkd
     if(character) {
         card = (
             <Fragment>
@@ -41,12 +43,16 @@ function CharacterCard({ character }) {
                 />
     
                 <CardContent>
-                    <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
-                        {character.race_name}
+                    <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14, fontStyle: 'italic' }}>
+                        {character['race_name']}
                     </Typography>
-    
+
+                    <Typography variant="h6" component="div">
+                    {character['arch_name']}
+                    </Typography>
+
                     <Typography variant="h5" component="div">
-                    {character.arch_name ? character.arch_name : null} {character.cls_name}
+                    {character['cls_name']}
                     </Typography>
     
                     <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>
@@ -57,10 +63,34 @@ function CharacterCard({ character }) {
         )
     }
 
+    let detailCard
+
+    if (character) {
+        detailCard = (
+            <Fragment>
+                <CardContent>
+                    
+                    <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 18 }}>
+                        {character['cls_name']}
+                    </Typography>
+
+                    <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 16, fontStyle: 'italic' }}>
+                        {character['arch_name']}
+                    </Typography>
+
+                    <Typography gutterBottom variant='body2' >
+                        {character['arch_desc']}
+                    </Typography>
+
+                </CardContent>
+            </Fragment>
+        )
+    }
+
     return(
         <Box sx={{ maxWidth: 300 }}>
             <Card align={'center'} sx={{height: 360}} variant="outlined">
-                {card}
+                {character ? detailCard : card}
             </Card>
         </Box>
     )
