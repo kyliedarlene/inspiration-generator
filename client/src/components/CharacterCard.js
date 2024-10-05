@@ -89,7 +89,7 @@ function CharacterCard({ character }) {
 
     return(
         <Box sx={{ maxWidth: 300 }}>
-            <Card align={'center'} sx={{height: 360}} variant="outlined">
+            <Card sx={{height: 360}} variant="outlined">
                 {character ? detailCard : card}
             </Card>
         </Box>
