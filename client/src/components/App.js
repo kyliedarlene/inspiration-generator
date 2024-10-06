@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState } from "react";
 import { Outlet } from "react-router-dom";
 
-import { Container, Typography, Button, Box } from "@mui/material";
+import { Container, Typography, Button, Box, Grid2 } from "@mui/material";
 
 import Header from "./Header";
 import { UserContext } from "../context/user";
@@ -37,17 +37,22 @@ function App() {
     <div>
       <Header />
       <Container 
-      maxWidth='md'  
-      sx={{
-        // margin: 'auto',
-        display: 'flex',
-        justifyContent: 'center',  // Center horizontally
-        // alignItems: 'center',      // Center vertically (optional)
-        // minHeight: '100vh',        // Full viewport height (optional)
-        backgroundColor: 'lightgrey'
-      }}
+        maxWidth='md'  
+        sx={{
+          // margin: 'auto',
+          display: 'flex',
+          height: 600,
+          justifyContent: 'center',  // Center horizontally
+          alignItems: 'center',      // Center vertically (optional)
+          // minHeight: '100vh',        // Full viewport height (optional)
+          backgroundColor: 'lightgrey'
+        }}
       >
-        <Box>
+        <Box
+          sx={{
+            backgroundColor: 'red'
+          }}
+        >
           <Typography>test! test! test!</Typography>
           <Button variant="contained">Roll Character!</Button>
           {/* <Outlet /> */}
