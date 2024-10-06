@@ -41,6 +41,7 @@ function App() {
         sx={{
           // margin: 'auto',
           display: 'flex',
+          flexDirection: 'column',
           height: 600,
           justifyContent: 'center',  // Center horizontally
           alignItems: 'center',      // Center vertically (optional)

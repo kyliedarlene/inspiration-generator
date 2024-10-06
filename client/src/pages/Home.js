@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import {Button} from '@mui/material';
+import { Button, Box } from '@mui/material';
 
 function Home() {
     return (
