@@ -48,15 +48,7 @@ function App() {
           backgroundColor: 'lightgrey'
         }}
       >
-        <Box
-          sx={{
-            backgroundColor: 'red'
-          }}
-        >
-          <Typography>test! test! test!</Typography>
-          <Button variant="contained">Roll Character!</Button>
-          {/* <Outlet /> */}
-        </Box>
+        <Outlet />
       </Container>
     </div>
   )
