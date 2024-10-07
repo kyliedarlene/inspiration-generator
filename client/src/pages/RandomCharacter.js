@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import {
     Button,
     Container,
+    Box
 } from '@mui/material'
 import { flex } from '@mui/system';
 
@@ -22,16 +23,10 @@ function RandomCharacter() {
     console.log(character)
         
     return (
-        <Container 
-            maxWidth='sm' 
-            sx={{ 
-                justifyContent: 'center', 
-                display: flex
-            }} 
-        >
+        <>
             <CharacterCard character={character} />
             <Button variant={"contained"} onClick={() => setCharacter()} >New Character</Button>
-        </Container>
+        </>
     )
 }
 

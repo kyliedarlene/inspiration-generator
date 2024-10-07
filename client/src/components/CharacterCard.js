@@ -88,11 +88,9 @@ function CharacterCard({ character }) {
     }
 
     return(
-        <Box sx={{ maxWidth: 300 }}>
-            <Card sx={{height: 360}} variant="outlined">
-                {character ? detailCard : card}
-            </Card>
-        </Box>
+        <Card sx={{height: 360, width: 300}} variant="outlined">
+            {card}
+        </Card>
     )
 }
 
